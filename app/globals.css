@@ -4,9 +4,9 @@
   --paper: #dfe4e0;
   --paper-bright: #f2f4f1;
   --white: #ffffff;
-  --ash: #b2beb5;
-  --ash-dark: #5f6d64;
-  --ash-faint: #e7ebe8;
+  --ash: #7d8981;
+  --ash-dark: #465149;
+  --ash-faint: #d7ddd8;
   --muted: #596159;
   --line: rgba(8, 10, 9, 0.18);
   --line-dark: rgba(255, 255, 255, 0.18);
@@ -63,7 +63,7 @@ img {
 }
 
 :focus-visible {
-  outline: 2px solid var(--ash-dark);
+  outline: 2px solid var(--ash);
   outline-offset: 4px;
 }
 
@@ -87,7 +87,7 @@ img {
 .site-header {
   backdrop-filter: blur(18px);
   background: rgba(8, 10, 9, 0.9);
-  border-bottom: 1px solid rgba(178, 190, 181, 0.24);
+  border-bottom: 1px solid rgba(125, 137, 129, 0.34);
   color: var(--white);
   position: sticky;
   top: 0;
@@ -154,7 +154,7 @@ img {
 }
 
 .brand-copy small {
-  color: rgba(178, 190, 181, 0.72);
+  color: rgba(125, 137, 129, 0.9);
   font-family: var(--font-mono);
   font-size: 7px;
   letter-spacing: 0.3em;
@@ -234,7 +234,7 @@ img {
 
 .mobile-nav {
   background: var(--ink);
-  border-bottom: 1px solid rgba(178, 190, 181, 0.24);
+  border-bottom: 1px solid rgba(125, 137, 129, 0.34);
   display: none;
   padding: 8px 24px 24px;
 }
@@ -431,14 +431,17 @@ img {
 
 .hero-visual {
   animation: reveal-image 900ms 220ms cubic-bezier(0.22, 1, 0.36, 1) both;
-  align-self: stretch;
-  min-height: 520px;
+  align-self: center;
+  aspect-ratio: 1200 / 630;
+  min-height: 0;
   position: relative;
+  width: 100%;
 }
 
 .hero-image {
-  border: 1px solid rgba(178, 190, 181, 0.22);
-  inset: 0 0 0 8%;
+  background: var(--ink);
+  border: 1px solid rgba(125, 137, 129, 0.32);
+  inset: 0;
   overflow: hidden;
   position: absolute;
 }
@@ -456,8 +459,8 @@ img {
 .hero-image img {
   animation: image-drift 16s ease-in-out infinite alternate;
   filter: grayscale(1) contrast(1.08);
-  object-fit: cover;
-  object-position: 76% center;
+  object-fit: contain;
+  object-position: center;
 }
 
 .hero-grid-overlay {
@@ -525,7 +528,7 @@ img {
   font-family: var(--font-mono);
   font-size: 7px;
   justify-content: space-between;
-  left: 8%;
+  left: 0;
   letter-spacing: 0.13em;
   padding: 14px 16px;
   position: absolute;
@@ -551,7 +554,7 @@ img {
 }
 
 .hero-specs > div:hover {
-  background: rgba(178, 190, 181, 0.08);
+  background: rgba(125, 137, 129, 0.12);
 }
 
 .hero-specs > div:first-child {
@@ -1104,7 +1107,7 @@ legend {
 .quote-form textarea:focus,
 .payment-form input:focus {
   border-color: var(--ash-dark);
-  box-shadow: 0 0 0 3px rgba(95, 109, 100, 0.14);
+  box-shadow: 0 0 0 3px rgba(70, 81, 73, 0.16);
   outline: 0;
 }
 
@@ -1361,8 +1364,14 @@ legend {
 }
 
 @keyframes image-drift {
-  from { transform: scale(1.01) translate3d(0, 0, 0); }
-  to { transform: scale(1.055) translate3d(-0.7%, -0.5%, 0); }
+  from {
+    opacity: 0.92;
+    transform: scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 @keyframes rail-sheen {
@@ -1513,7 +1522,8 @@ legend {
   }
 
   .hero-visual {
-    min-height: min(66vw, 560px);
+    aspect-ratio: 1200 / 630;
+    min-height: 0;
   }
 
   .hero-image {
@@ -1604,7 +1614,8 @@ legend {
   }
 
   .hero-visual {
-    min-height: 108vw;
+    aspect-ratio: 1200 / 630;
+    min-height: 0;
   }
 
   .radius-graphic {
