@@ -73,11 +73,6 @@ export default async function Home({
                 />
                 <div className="hero-grid-overlay" aria-hidden="true" />
               </div>
-              <div className="radius-graphic" aria-hidden="true">
-                <span className="radius-line" />
-                <span className="radius-point" />
-                <small>R / CONTROLLED</small>
-              </div>
               <div className="visual-index" aria-hidden="true">
                 <span>FORM / 01</span>
                 <span>33.8366° N</span>

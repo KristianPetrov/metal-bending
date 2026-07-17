@@ -474,52 +474,6 @@ img {
   position: absolute;
 }
 
-.radius-graphic {
-  border: 1px solid rgba(255, 255, 255, 0.62);
-  border-bottom: 0;
-  border-radius: 50% 50% 0 0;
-  bottom: 14%;
-  height: 44%;
-  left: -4%;
-  position: absolute;
-  width: 55%;
-  z-index: 2;
-}
-
-.radius-line {
-  background: rgba(255, 255, 255, 0.55);
-  bottom: 0;
-  height: 1px;
-  left: 50%;
-  position: absolute;
-  transform: rotate(-46deg);
-  transform-origin: left center;
-  width: 62%;
-}
-
-.radius-point {
-  background: var(--ash);
-  bottom: -4px;
-  height: 9px;
-  left: calc(50% - 4px);
-  position: absolute;
-  width: 9px;
-}
-
-.radius-graphic small {
-  background: var(--ash);
-  bottom: 19%;
-  color: var(--ink);
-  font-family: var(--font-mono);
-  font-size: 8px;
-  left: 64%;
-  letter-spacing: 0.12em;
-  padding: 8px 10px;
-  position: absolute;
-  transform: rotate(46deg);
-  white-space: nowrap;
-}
-
 .visual-index {
   align-items: center;
   background: rgba(17, 19, 17, 0.88);
@@ -1616,12 +1570,6 @@ legend {
   .hero-visual {
     aspect-ratio: 1200 / 630;
     min-height: 0;
-  }
-
-  .radius-graphic {
-    height: 38%;
-    left: -8%;
-    width: 66%;
   }
 
   .hero-specs {
