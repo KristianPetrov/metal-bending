@@ -1,5 +1,6 @@
 "use client";
 
+import { upload } from "@vercel/blob/client";
 import {
   ArrowLeft,
   ArrowRight,
@@ -27,6 +28,15 @@ const acceptedFiles = ".pdf,.dwg,.dxf,.step,.stp,.iges,.igs,.zip,.jpg,.jpeg,.png
 
 type Tab = "quote" | "payment";
 
+function safeUploadFilename(filename: string) {
+  return filename
+    .normalize("NFKD")
+    .replace(/[^a-zA-Z0-9._-]+/g, "-")
+    .replace(/-+/g, "-")
+    .replace(/^[-.]+|[-.]+$/g, "")
+    .slice(0, 120) || "drawing";
+}
+
 export default function QuoteWorkspace({ initialPaymentComplete = false }: { initialPaymentComplete?: boolean }) {
   const [tab, setTab] = useState<Tab>(initialPaymentComplete ? "payment" : "quote");
   const [step, setStep] = useState(1);
@@ -34,6 +44,7 @@ export default function QuoteWorkspace({ initialPaymentComplete = false }: { ini
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [dragging, setDragging] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+  const [uploadProgress, setUploadProgress] = useState<number | null>(null);
   const [error, setError] = useState("");
   const [reference, setReference] = useState("");
   const fileInput = useRef<HTMLInputElement>(null);
@@ -65,9 +76,27 @@ export default function QuoteWorkspace({ initialPaymentComplete = false }: { ini
 
     const formData = new FormData(event.currentTarget);
     formData.set("projectType", projectType);
-    if (selectedFile) formData.set("file", selectedFile);
+    formData.delete("file");
 
     try {
+      if (selectedFile) {
+        setUploadProgress(0);
+        const filename = safeUploadFilename(selectedFile.name);
+        const pathname = `quotes/pending/${crypto.randomUUID()}/${filename}`;
+        const blob = await upload(pathname, selectedFile, {
+          access: "private",
+          contentType: selectedFile.type || "application/octet-stream",
+          handleUploadUrl: "/api/upload",
+          multipart: selectedFile.size >= 5 * 1024 * 1024,
+          onUploadProgress: ({ percentage }) => setUploadProgress(Math.round(percentage)),
+        });
+
+        formData.set("filePathname", blob.pathname);
+        formData.set("fileName", filename);
+        formData.set("fileSize", String(selectedFile.size));
+        setUploadProgress(100);
+      }
+
       const response = await fetch("/api/quote", { method: "POST", body: formData });
       const data = (await response.json()) as { reference?: string; error?: string };
       if (!response.ok || !data.reference) {
@@ -78,6 +107,7 @@ export default function QuoteWorkspace({ initialPaymentComplete = false }: { ini
       setError(submitError instanceof Error ? submitError.message : "We could not send your request.");
     } finally {
       setSubmitting(false);
+      setUploadProgress(null);
     }
   }
 
@@ -337,7 +367,12 @@ export default function QuoteWorkspace({ initialPaymentComplete = false }: { ini
               ) : (
                 <button className="button button-dark form-next" type="submit" disabled={submitting}>
                   {submitting ? (
-                    <><LoaderCircle className="spin" size={17} aria-hidden="true" /> Sending…</>
+                    <>
+                      <LoaderCircle className="spin" size={17} aria-hidden="true" />
+                      {uploadProgress !== null && uploadProgress < 100
+                        ? `Uploading ${uploadProgress}%…`
+                        : "Sending…"}
+                    </>
                   ) : (
                     <>Send quote request <ArrowRight size={16} aria-hidden="true" /></>
                   )}

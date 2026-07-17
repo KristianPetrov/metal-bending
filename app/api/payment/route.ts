@@ -1,9 +1,5 @@
-import { env } from "cloudflare:workers";
-
-interface RuntimeBindings {
-  STRIPE_SECRET_KEY?: string;
-  SITE_URL?: string;
-}
+export const runtime = "nodejs";
+export const maxDuration = 30;
 
 export async function POST(request: Request) {
   try {
@@ -16,8 +12,7 @@ export async function POST(request: Request) {
       return Response.json({ error: "Please check the invoice number, email, and payment amount." }, { status: 400 });
     }
 
-    const bindings = env as unknown as RuntimeBindings;
-    const stripeKey = bindings.STRIPE_SECRET_KEY || process.env.STRIPE_SECRET_KEY;
+    const stripeKey = process.env.STRIPE_SECRET_KEY;
     if (!stripeKey) {
       return Response.json(
         { error: "Online payments are being connected. Please call (714) 238-1200 to make a payment." },
@@ -26,7 +21,10 @@ export async function POST(request: Request) {
     }
 
     const requestUrl = new URL(request.url);
-    const siteUrl = (bindings.SITE_URL || process.env.SITE_URL || requestUrl.origin).replace(/\/$/, "");
+    const vercelProductionUrl = process.env.VERCEL_PROJECT_PRODUCTION_URL
+      ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+      : "";
+    const siteUrl = (process.env.SITE_URL || vercelProductionUrl || requestUrl.origin).replace(/\/$/, "");
     const params = new URLSearchParams({
       mode: "payment",
       customer_email: email,

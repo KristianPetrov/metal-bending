@@ -1,4 +1,7 @@
-import { env } from "cloudflare:workers";
+import { del, head, put, rename } from "@vercel/blob";
+
+export const runtime = "nodejs";
+export const maxDuration = 60;
 
 const MAX_FILE_SIZE = 25 * 1024 * 1024;
 const ALLOWED_EXTENSIONS = new Set([
@@ -14,33 +17,6 @@ const ALLOWED_EXTENSIONS = new Set([
   "jpeg",
   "png",
 ]);
-
-interface D1Statement {
-  bind(...values: unknown[]): D1Statement;
-  run(): Promise<unknown>;
-}
-
-interface D1DatabaseBinding {
-  prepare(query: string): D1Statement;
-  batch(statements: D1Statement[]): Promise<unknown>;
-}
-
-interface R2BucketBinding {
-  put(
-    key: string,
-    value: ArrayBuffer,
-    options?: {
-      httpMetadata?: { contentType?: string };
-      customMetadata?: Record<string, string>;
-    },
-  ): Promise<unknown>;
-  delete(key: string): Promise<void>;
-}
-
-interface RuntimeBindings {
-  DB?: D1DatabaseBinding;
-  UPLOADS?: R2BucketBinding;
-}
 
 function readText(formData: FormData, key: string, maxLength = 1000) {
   const value = formData.get(key);
@@ -62,39 +38,10 @@ function createReference() {
   return `MBC-${date}-${suffix}`;
 }
 
-async function ensureSchema(db: D1DatabaseBinding) {
-  const table = db.prepare(`
-    CREATE TABLE IF NOT EXISTS quote_requests (
-      id TEXT PRIMARY KEY,
-      created_at TEXT NOT NULL,
-      status TEXT NOT NULL DEFAULT 'new',
-      company TEXT NOT NULL,
-      contact_name TEXT NOT NULL,
-      email TEXT NOT NULL,
-      phone TEXT,
-      project_type TEXT NOT NULL,
-      material TEXT,
-      profile TEXT,
-      quantity INTEGER,
-      radius TEXT,
-      timeline TEXT,
-      notes TEXT,
-      file_key TEXT,
-      file_name TEXT,
-      file_type TEXT,
-      file_size INTEGER
-    )
-  `);
-  const index = db.prepare(
-    "CREATE INDEX IF NOT EXISTS quote_requests_created_at_idx ON quote_requests (created_at)",
-  );
-  await db.batch([table, index]);
-}
-
 export async function POST(request: Request) {
   const contentLength = Number(request.headers.get("content-length") || 0);
-  if (contentLength > MAX_FILE_SIZE + 1024 * 1024) {
-    return Response.json({ error: "The upload is too large. Please keep files under 25 MB." }, { status: 413 });
+  if (contentLength > 1024 * 1024) {
+    return Response.json({ error: "The quote request is too large." }, { status: 413 });
   }
 
   try {
@@ -108,8 +55,7 @@ export async function POST(request: Request) {
       return Response.json({ error: "Please complete the required contact and project fields." }, { status: 400 });
     }
 
-    const bindings = env as unknown as RuntimeBindings;
-    if (!bindings.DB) {
+    if (!process.env.BLOB_READ_WRITE_TOKEN && !process.env.BLOB_STORE_ID) {
       return Response.json(
         { error: "Online quote storage is being connected. Please call (714) 238-1200 in the meantime." },
         { status: 503 },
@@ -118,73 +64,69 @@ export async function POST(request: Request) {
 
     const reference = createReference();
     const createdAt = new Date().toISOString();
-    const fileValue = formData.get("file");
-    const drawing = fileValue instanceof File && fileValue.size > 0 ? fileValue : null;
-    let fileKey: string | null = null;
-    let storedFilename: string | null = null;
+    const pendingFilePath = readText(formData, "filePathname", 500);
+    const submittedFileName = safeFilename(
+      readText(formData, "fileName", 160) || pendingFilePath.split("/").pop() || "drawing",
+    );
+    let drawing: Awaited<ReturnType<typeof rename>> | null = null;
+    let drawingSize: number | null = null;
 
-    if (drawing) {
-      if (drawing.size > MAX_FILE_SIZE) {
+    if (pendingFilePath) {
+      const extension = pendingFilePath.split(".").pop()?.toLowerCase() || "";
+      if (!pendingFilePath.startsWith("quotes/pending/") || !ALLOWED_EXTENSIONS.has(extension)) {
+        return Response.json({ error: "The uploaded drawing reference is invalid." }, { status: 400 });
+      }
+
+      const pendingBlob = await head(pendingFilePath);
+      if (pendingBlob.size > MAX_FILE_SIZE) {
+        await del(pendingFilePath);
         return Response.json({ error: "Please keep drawings and CAD files under 25 MB." }, { status: 413 });
       }
 
-      const extension = drawing.name.split(".").pop()?.toLowerCase() || "";
-      if (!ALLOWED_EXTENSIONS.has(extension)) {
-        return Response.json(
-          { error: "Please upload a PDF, DWG, DXF, STEP, IGES, ZIP, JPG, or PNG file." },
-          { status: 415 },
-        );
-      }
-      if (!bindings.UPLOADS) {
-        return Response.json(
-          { error: "Drawing uploads are being connected. You can continue without the file or call us for help." },
-          { status: 503 },
-        );
-      }
+      drawingSize = pendingBlob.size;
 
-      storedFilename = safeFilename(drawing.name);
-      fileKey = `quotes/${reference}/${storedFilename}`;
-      await bindings.UPLOADS.put(fileKey, await drawing.arrayBuffer(), {
-        httpMetadata: { contentType: drawing.type || "application/octet-stream" },
-        customMetadata: { reference, company },
+      drawing = await rename(pendingFilePath, `quotes/${reference}/${submittedFileName}`, {
+        access: "private",
+        addRandomSuffix: false,
       });
     }
 
-    try {
-      await ensureSchema(bindings.DB);
-      const rawQuantity = readText(formData, "quantity", 10);
-      const quantity = rawQuantity ? Number.parseInt(rawQuantity, 10) : null;
+    const rawQuantity = readText(formData, "quantity", 10);
+    const quantity = rawQuantity ? Number.parseInt(rawQuantity, 10) : null;
+    const quoteRecord = {
+      id: reference,
+      createdAt,
+      status: "new",
+      company,
+      contactName,
+      email,
+      phone: readText(formData, "phone", 60) || null,
+      projectType,
+      material: readText(formData, "material", 100) || null,
+      profile: readText(formData, "profile", 200) || null,
+      quantity: Number.isFinite(quantity) ? quantity : null,
+      radius: readText(formData, "radius", 120) || null,
+      timeline: readText(formData, "timeline", 80) || null,
+      notes: readText(formData, "notes", 4000) || null,
+      drawing: drawing
+        ? {
+            pathname: drawing.pathname,
+            filename: submittedFileName,
+            contentType: drawing.contentType,
+            size: drawingSize,
+          }
+        : null,
+    };
 
-      await bindings.DB.prepare(`
-        INSERT INTO quote_requests (
-          id, created_at, status, company, contact_name, email, phone,
-          project_type, material, profile, quantity, radius, timeline, notes,
-          file_key, file_name, file_type, file_size
-        ) VALUES (?, ?, 'new', ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-      `)
-        .bind(
-          reference,
-          createdAt,
-          company,
-          contactName,
-          email,
-          readText(formData, "phone", 60) || null,
-          projectType,
-          readText(formData, "material", 100) || null,
-          readText(formData, "profile", 200) || null,
-          Number.isFinite(quantity) ? quantity : null,
-          readText(formData, "radius", 120) || null,
-          readText(formData, "timeline", 80) || null,
-          readText(formData, "notes", 4000) || null,
-          fileKey,
-          storedFilename,
-          drawing?.type || null,
-          drawing?.size || null,
-        )
-        .run();
-    } catch (databaseError) {
-      if (fileKey && bindings.UPLOADS) await bindings.UPLOADS.delete(fileKey);
-      throw databaseError;
+    try {
+      await put(`quotes/${reference}/request.json`, JSON.stringify(quoteRecord, null, 2), {
+        access: "private",
+        addRandomSuffix: false,
+        contentType: "application/json",
+      });
+    } catch (metadataError) {
+      if (drawing) await del(drawing.pathname);
+      throw metadataError;
     }
 
     return Response.json({ reference });

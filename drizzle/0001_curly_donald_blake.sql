@@ -1,1 +1,0 @@
-CREATE INDEX `quote_requests_created_at_idx` ON `quote_requests` (`created_at`);

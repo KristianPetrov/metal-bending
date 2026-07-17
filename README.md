@@ -1,36 +1,39 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Metal Bending Corporation
 
-## Getting Started
+Production website for [metalbending.com](https://www.metalbending.com), built with the Next.js App Router and prepared for zero-configuration deployment on Vercel.
 
-First, run the development server:
+## Stack
+
+- Next.js 16.2.10 (latest stable release)
+- React 19.2.7
+- TypeScript
+- Vercel Blob private storage for quote requests and CAD/drawing uploads
+- Stripe Checkout for invoice and deposit payments
+
+## Local development
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
+pnpm install
+cp .env.example .env.local
 pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Vercel deployment
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. Import this repository into Vercel. The framework preset is detected automatically as Next.js.
+2. In the project **Storage** tab, create and connect a **Private Blob** store. Vercel adds the Blob credentials automatically.
+3. Add `STRIPE_SECRET_KEY` in **Settings → Environment Variables** to enable invoice payments.
+4. Optionally set `SITE_URL` to `https://www.metalbending.com` for Stripe success and cancellation redirects.
+5. Deploy. Vercel uses `pnpm-lock.yaml` and runs `next build` automatically.
 
-## Learn More
+Quote requests and uploaded drawings are stored under the `quotes/` folder in the connected private Blob store. Without the Blob store or Stripe key, the public forms fail safely and show the business phone number.
 
-To learn more about Next.js, take a look at the following resources:
+## Validation
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+pnpm lint
+pnpm typecheck
+pnpm build
+```
