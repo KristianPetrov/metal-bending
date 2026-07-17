@@ -18,7 +18,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const host = requestHeaders.get("x-forwarded-host") || requestHeaders.get("host") || "www.metalbending.com";
   const protocol = requestHeaders.get("x-forwarded-proto") || (host.includes("localhost") ? "http" : "https");
   const baseUrl = new URL(`${protocol}://${host}`);
-  const socialImage = new URL("/og.png", baseUrl).toString();
+  const socialImage = new URL("/og-v2.png", baseUrl).toString();
 
   return {
     metadataBase: baseUrl,
@@ -36,7 +36,7 @@ export async function generateMetadata(): Promise<Metadata> {
     alternates: { canonical: "/" },
     openGraph: {
       title: "Precision Curves. Zero Compromise.",
-      description: "Custom stretch forming for architectural, commercial, and specialty metal projects.",
+      description: "Precision stretch forming for architectural, commercial, and specialty metal projects.",
       type: "website",
       locale: "en_US",
       siteName: "Metal Bending Corporation",
@@ -46,7 +46,7 @@ export async function generateMetadata(): Promise<Metadata> {
     twitter: {
       card: "summary_large_image",
       title: "Precision Curves. Zero Compromise.",
-      description: "Custom stretch forming for architectural, commercial, and specialty metal projects.",
+      description: "Precision stretch forming for architectural, commercial, and specialty metal projects.",
       images: [socialImage],
     },
   };
