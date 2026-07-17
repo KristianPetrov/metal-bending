@@ -65,8 +65,8 @@ export default async function Home({
             <div className="hero-visual">
               <div className="hero-image">
                 <Image
-                  src="/projects/hero.jpg"
-                  alt="Curved architectural ceiling formed with repeating metal members"
+                  src="/og.png"
+                  alt="Precision-formed curved metal profiles"
                   fill
                   priority
                   sizes="(max-width: 900px) 100vw, 48vw"
