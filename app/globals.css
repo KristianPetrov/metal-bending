@@ -1,12 +1,12 @@
 :root {
   --ink: #080a09;
   --ink-soft: #121513;
-  --paper: #dfe4e0;
-  --paper-bright: #f2f4f1;
+  --paper: #f4f4f1;
+  --paper-bright: #ffffff;
   --white: #ffffff;
   --ash: #6f7478;
   --ash-dark: #3e4347;
-  --ash-faint: #d8dadc;
+  --ash-faint: #ecece9;
   --muted: #596159;
   --line: rgba(8, 10, 9, 0.18);
   --line-dark: rgba(255, 255, 255, 0.18);
@@ -203,7 +203,7 @@ img {
 
 .header-cta {
   align-items: center;
-  background: var(--ash);
+  background: var(--white);
   color: var(--ink);
   display: inline-flex;
   font-size: 10px;
@@ -218,7 +218,7 @@ img {
 }
 
 .header-cta:hover {
-  background: var(--white);
+  background: var(--paper);
   transform: translateY(-2px);
 }
 
@@ -304,12 +304,12 @@ img {
 }
 
 .button-primary {
-  background: var(--ash);
+  background: var(--white);
   color: var(--ink);
 }
 
 .button-primary:hover {
-  background: var(--white);
+  background: var(--paper);
   transform: translateY(-2px);
 }
 
@@ -530,7 +530,7 @@ img {
 }
 
 .material-rail {
-  background: var(--ash);
+  background: var(--paper);
   color: var(--ink);
   overflow: hidden;
   position: relative;
@@ -568,7 +568,7 @@ img {
 /* Capabilities */
 
 .capabilities-section {
-  background: var(--ash);
+  background: var(--white);
 }
 
 .section-heading {
@@ -620,7 +620,7 @@ img {
 }
 
 .capability-list li:hover {
-  background: rgba(255, 255, 255, 0.28);
+  background: rgba(8, 10, 9, 0.04);
   padding-left: 18px;
 }
 
@@ -1729,7 +1729,8 @@ legend {
 
   .mobile-quote-button {
     align-items: center;
-    background: var(--ash);
+    background: var(--white);
+    border-top: 1px solid var(--line);
     bottom: 0;
     color: var(--ink);
     display: flex;
