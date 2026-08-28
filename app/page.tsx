@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { ArrowDownRight, ArrowRight, Mail, MapPin, Phone } from "lucide-react";
+import CurveCalculator from "./components/curve-calculator";
 import QuoteWorkspace from "./components/quote-workspace";
 import SiteHeader from "./components/site-header";
 
@@ -122,10 +123,29 @@ export default async function Home({
           </div>
         </section>
 
+        <section id="tools" className="section tools-section">
+          <div className="shell">
+            <header className="tools-heading">
+              <div>
+                <p className="signal-label"><span>03</span> Curve lab</p>
+                <p className="tools-eyebrow">Field tools / live geometry</p>
+              </div>
+              <div>
+                <h2>Measure the opening.<br /><span>Define the curve.</span></h2>
+                <p>
+                  Turn field dimensions into a centerline radius, check arc length, or plan stud spacing
+                  before you request a quote.
+                </p>
+              </div>
+            </header>
+            <CurveCalculator />
+          </div>
+        </section>
+
         <section id="process" className="section process-section">
           <div className="shell">
             <header className="process-heading">
-              <p className="signal-label"><span>03</span> From file to form</p>
+              <p className="signal-label"><span>04</span> From file to form</p>
               <h2>Complex geometry.<br /><span>Clear process.</span></h2>
             </header>
             <ol className="process-steps">
@@ -148,7 +168,7 @@ export default async function Home({
         <section id="quote" className="section quote-section">
           <div className="shell quote-grid">
             <div className="quote-intro">
-              <p className="signal-label signal-dark"><span>04</span> Start a project</p>
+              <p className="signal-label signal-dark"><span>05</span> Start a project</p>
               <h2>Send the curve.<br /><span>We&apos;ll solve the rest.</span></h2>
               <p>Rough details are enough to begin. A forming specialist will review your project and follow up.</p>
               <address className="direct-contact">
