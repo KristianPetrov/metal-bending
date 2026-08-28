@@ -147,7 +147,7 @@ img {
 }
 
 .brand-copy strong {
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 720;
   letter-spacing: 0.13em;
   line-height: 1;
@@ -156,10 +156,10 @@ img {
 .brand-copy small {
   color: rgba(111, 116, 120, 0.9);
   font-family: var(--font-mono);
-  font-size: 7px;
-  letter-spacing: 0.3em;
+  font-size: 12px;
+  letter-spacing: 0.22em;
   line-height: 1;
-  margin-top: 7px;
+  margin-top: 6px;
 }
 
 .desktop-nav {
@@ -171,7 +171,7 @@ img {
 .desktop-nav a {
   color: rgba(255, 255, 255, 0.68);
   font-family: var(--font-mono);
-  font-size: 9px;
+  font-size: 12px;
   font-weight: 600;
   letter-spacing: 0.12em;
   position: relative;
@@ -206,7 +206,7 @@ img {
   background: var(--white);
   color: var(--ink);
   display: inline-flex;
-  font-size: 10px;
+  font-size: 13px;
   font-weight: 650;
   gap: 18px;
   justify-self: end;
@@ -243,7 +243,7 @@ img {
   border-bottom: 1px solid var(--line-dark);
   color: rgba(255, 255, 255, 0.78);
   font-family: var(--font-mono);
-  font-size: 10px;
+  font-size: 13px;
   letter-spacing: 0.12em;
   padding: 16px 0;
   text-transform: uppercase;
@@ -260,7 +260,7 @@ img {
   color: rgba(255, 255, 255, 0.6);
   display: flex;
   font-family: var(--font-mono);
-  font-size: 9px;
+  font-size: 12px;
   font-weight: 550;
   gap: 13px;
   letter-spacing: 0.14em;
@@ -287,7 +287,7 @@ img {
   border: 0;
   cursor: pointer;
   display: inline-flex;
-  font-size: 10px;
+  font-size: 13px;
   font-weight: 700;
   gap: 12px;
   justify-content: center;
@@ -417,7 +417,7 @@ img {
   color: rgba(255, 255, 255, 0.78);
   display: inline-flex;
   font-family: var(--font-mono);
-  font-size: 9px;
+  font-size: 12px;
   gap: 10px;
   letter-spacing: 0.09em;
   text-transform: uppercase;
@@ -480,7 +480,7 @@ img {
   bottom: 0;
   display: flex;
   font-family: var(--font-mono);
-  font-size: 7px;
+  font-size: 12px;
   justify-content: space-between;
   left: 0;
   letter-spacing: 0.13em;
@@ -524,7 +524,7 @@ img {
 .hero-specs span {
   color: rgba(255, 255, 255, 0.45);
   font-family: var(--font-mono);
-  font-size: 7px;
+  font-size: 12px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
 }
@@ -551,7 +551,7 @@ img {
   align-items: center;
   display: flex;
   font-family: var(--font-mono);
-  font-size: 8px;
+  font-size: 12px;
   justify-content: space-between;
   letter-spacing: 0.16em;
   min-height: 50px;
@@ -595,7 +595,7 @@ img {
 
 .section-heading > div > p {
   color: var(--muted);
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.65;
   margin: 26px 0 0;
   max-width: 490px;
@@ -628,7 +628,7 @@ img {
 .capability-detail {
   color: var(--muted);
   font-family: var(--font-mono);
-  font-size: 8px;
+  font-size: 12px;
   letter-spacing: 0.11em;
   text-transform: uppercase;
 }
@@ -642,7 +642,7 @@ img {
 
 .capability-list p {
   color: var(--muted);
-  font-size: 12px;
+  font-size: 14px;
   line-height: 1.65;
   margin: 0;
   max-width: 430px;
@@ -1194,7 +1194,7 @@ img {
   color: var(--ash);
   display: block;
   font-family: var(--font-mono);
-  font-size: 9px;
+  font-size: 12px;
   margin-bottom: 68px;
 }
 
@@ -1207,7 +1207,7 @@ img {
 
 .process-steps p {
   color: rgba(255, 255, 255, 0.48);
-  font-size: 12px;
+  font-size: 14px;
   line-height: 1.65;
   margin: 0;
   max-width: 280px;
@@ -1219,7 +1219,7 @@ img {
   color: rgba(255, 255, 255, 0.45);
   display: flex;
   font-family: var(--font-mono);
-  font-size: 7px;
+  font-size: 12px;
   gap: 20px;
   letter-spacing: 0.14em;
   margin: 34px 0 0;
@@ -1263,7 +1263,7 @@ img {
 
 .quote-intro > p:not(.signal-label) {
   color: var(--muted);
-  font-size: 13px;
+  font-size: 16px;
   line-height: 1.7;
   margin: 28px 0 0;
   max-width: 420px;
@@ -1282,7 +1282,7 @@ img {
 .direct-contact a {
   align-items: center;
   display: flex;
-  font-size: 11px;
+  font-size: 14px;
   font-weight: 600;
   gap: 11px;
 }
@@ -1295,7 +1295,7 @@ img {
   color: #939792;
   display: flex;
   font-family: var(--font-mono);
-  font-size: 7px;
+  font-size: 12px;
   justify-content: space-between;
   letter-spacing: 0.12em;
   margin-top: 70px;
@@ -1318,7 +1318,7 @@ img {
   border-bottom: 1px solid #c7ddd0;
   color: #305c43;
   display: flex;
-  font-size: 10px;
+  font-size: 13px;
   font-weight: 600;
   gap: 8px;
   padding: 12px 18px;
@@ -1339,7 +1339,7 @@ img {
   cursor: pointer;
   display: flex;
   font-family: var(--font-mono);
-  font-size: 8px;
+  font-size: 12px;
   font-weight: 650;
   gap: 9px;
   justify-content: center;
@@ -1389,15 +1389,15 @@ img {
   border: 1px solid currentColor;
   display: flex;
   font-family: var(--font-mono);
-  font-size: 8px;
-  height: 20px;
+  font-size: 12px;
+  height: 24px;
   justify-content: center;
-  width: 20px;
+  width: 24px;
 }
 
 .form-progress small {
   font-family: var(--font-mono);
-  font-size: 7px;
+  font-size: 12px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
 }
@@ -1409,7 +1409,7 @@ img {
 .form-kicker {
   color: var(--ash-dark);
   font-family: var(--font-mono);
-  font-size: 8px;
+  font-size: 12px;
   letter-spacing: 0.13em;
   margin: 0 0 12px;
   text-transform: uppercase;
@@ -1427,7 +1427,7 @@ img {
 .form-heading > p:last-child,
 .form-success > p:not(.form-kicker) {
   color: var(--muted);
-  font-size: 11px;
+  font-size: 14px;
   line-height: 1.55;
   margin: 11px 0 0;
 }
@@ -1443,7 +1443,7 @@ legend,
 .payment-form label {
   color: #3b3e3a;
   display: block;
-  font-size: 9px;
+  font-size: 12px;
   font-weight: 650;
   letter-spacing: 0.04em;
   width: 100%;
@@ -1466,7 +1466,7 @@ legend {
   color: #555954;
   cursor: pointer;
   display: flex;
-  font-size: 8px;
+  font-size: 12px;
   font-weight: 620;
   gap: 7px;
   min-height: 42px;
@@ -1516,7 +1516,7 @@ legend {
   border: 1px solid #c9ccc6;
   border-radius: 0;
   color: var(--ink);
-  font-size: 11px;
+  font-size: 14px;
   margin-top: 7px;
   min-height: 47px;
   padding: 0 13px;
@@ -1603,14 +1603,14 @@ legend {
 
 .file-drop > p {
   color: var(--muted);
-  font-size: 9px;
+  font-size: 13px;
   margin: 6px 0 16px;
 }
 
 .file-drop > small {
   color: #878b86;
   font-family: var(--font-mono);
-  font-size: 7px;
+  font-size: 12px;
   letter-spacing: 0.05em;
   margin-top: 14px;
 }
@@ -1643,7 +1643,7 @@ legend {
 }
 
 .selected-file strong {
-  font-size: 10px;
+  font-size: 13px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -1652,7 +1652,7 @@ legend {
 .selected-file small {
   color: var(--muted);
   font-family: var(--font-mono);
-  font-size: 7px;
+  font-size: 12px;
 }
 
 .selected-file button {
@@ -1672,7 +1672,7 @@ legend {
   align-items: center;
   color: var(--muted);
   display: flex;
-  font-size: 8px;
+  font-size: 12px;
   gap: 7px;
   margin: 19px 0 0;
 }
@@ -1681,7 +1681,7 @@ legend {
   background: #f8ebe8;
   border-left: 3px solid #b24f3e;
   color: #793d33;
-  font-size: 10px;
+  font-size: 13px;
   line-height: 1.5;
   margin: 17px 0 0;
   padding: 11px 13px;
@@ -1716,7 +1716,7 @@ legend {
 }
 
 .form-success > p:not(.form-kicker) {
-  font-size: 11px;
+  font-size: 14px;
   margin: 16px 0 28px;
   max-width: 440px;
 }
@@ -1837,7 +1837,7 @@ legend {
 }
 
 .footer-brand span {
-  font-size: 11px;
+  font-size: 13px;
   letter-spacing: 0;
   margin-left: 6px;
   vertical-align: top;
@@ -1862,7 +1862,7 @@ legend {
   align-items: center;
   color: rgba(255, 255, 255, 0.5);
   display: flex;
-  font-size: 9px;
+  font-size: 13px;
   gap: 10px;
   line-height: 1.45;
 }
@@ -1879,7 +1879,7 @@ legend {
   color: rgba(255, 255, 255, 0.34);
   display: flex;
   font-family: var(--font-mono);
-  font-size: 7px;
+  font-size: 12px;
   justify-content: space-between;
   letter-spacing: 0.13em;
   padding-bottom: 24px;
@@ -2041,7 +2041,7 @@ legend {
   }
 
   .brand-copy strong {
-    font-size: 11px;
+    font-size: 13px;
   }
 
   .hero-layout {
@@ -2235,7 +2235,7 @@ legend {
   }
 
   .workspace-tabs button {
-    font-size: 7px;
+    font-size: 12px;
   }
 
   .project-type-grid,
@@ -2290,7 +2290,7 @@ legend {
     bottom: 0;
     color: var(--ink);
     display: flex;
-    font-size: 10px;
+    font-size: 13px;
     font-weight: 700;
     gap: 12px;
     justify-content: center;
