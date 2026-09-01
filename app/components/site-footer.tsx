@@ -1,14 +1,15 @@
 import { Mail, MapPin, Phone, Printer } from "lucide-react";
+import Link from "next/link";
 import { company } from "@/lib/site-content";
 
 export default function SiteFooter() {
   return (
     <footer className="site-footer">
       <div className="shell footer-main">
-        <a className="footer-brand" href="/">
+        <Link className="footer-brand" href="/">
           {company.shortName}
           <span>®</span>
-        </a>
+        </Link>
         <p>
           Precision stretch forming
           <br />

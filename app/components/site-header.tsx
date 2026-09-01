@@ -1,20 +1,21 @@
 "use client";
 
 import { ArrowUpRight, Menu, X } from "lucide-react";
+import Link from "next/link";
 import { useState } from "react";
 import { company } from "@/lib/site-content";
 
 const links = [
   { href: "/#capabilities", label: "Capabilities" },
   { href: "/gallery", label: "Work" },
+  { href: "/#tools", label: "Curve tools" },
   { href: "/#process", label: "Process" },
   { href: "/manufacturing-equipment", label: "Equipment" },
-  { href: "/tools", label: "Radius tool" },
 ];
 
 function Brand() {
   return (
-    <a className="brand" href="/" aria-label={`${company.name} home`}>
+    <Link className="brand" href="/" aria-label={`${company.name} home`}>
       <span className="brand-mark" aria-hidden="true">
         <i />
         <i />
@@ -23,7 +24,7 @@ function Brand() {
         <strong>Metal Bending</strong>
         <small>Corporation</small>
       </span>
-    </a>
+    </Link>
   );
 }
 
@@ -36,14 +37,14 @@ export default function SiteHeader() {
         <Brand />
         <nav className="desktop-nav" aria-label="Primary navigation">
           {links.map((link) => (
-            <a key={link.href} href={link.href}>
+            <Link key={link.href} href={link.href}>
               {link.label}
-            </a>
+            </Link>
           ))}
         </nav>
-        <a className="header-cta" href="/#quote">
+        <Link className="header-cta" href="/#quote">
           Request a quote <ArrowUpRight size={15} aria-hidden="true" />
-        </a>
+        </Link>
         <button
           className="menu-toggle"
           type="button"
@@ -57,9 +58,9 @@ export default function SiteHeader() {
       </div>
       <nav id="mobile-menu" className={`mobile-nav ${open ? "is-open" : ""}`} aria-label="Mobile navigation">
         {links.map((link) => (
-          <a key={link.href} href={link.href} onClick={() => setOpen(false)}>
+          <Link key={link.href} href={link.href} onClick={() => setOpen(false)}>
             {link.label}
-          </a>
+          </Link>
         ))}
         <a href={company.phoneHref} onClick={() => setOpen(false)}>
           Call {company.phone}

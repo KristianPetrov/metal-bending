@@ -1,5 +1,7 @@
 import { ArrowDownRight, ArrowRight, FileDown, Mail, Phone, Printer } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
+import CurveCalculator from "./components/curve-calculator";
 import HeroSlideshow from "./components/hero-slideshow";
 import PageShell from "./components/page-shell";
 import QuoteWorkspace from "./components/quote-workspace";
@@ -169,9 +171,28 @@ export default async function Home({
                 </li>
               ))}
             </ul>
-            <a className="text-link work-more" href="/gallery">
+            <Link className="text-link work-more" href="/gallery">
               Open the full gallery <ArrowRight size={15} aria-hidden="true" />
-            </a>
+            </Link>
+          </div>
+        </section>
+
+        <section id="tools" className="section tools-section">
+          <div className="shell">
+            <header className="tools-heading">
+              <div>
+                <p className="signal-label"><span>05</span> Curve lab</p>
+                <p className="tools-eyebrow">Field tools / live geometry</p>
+              </div>
+              <div>
+                <h2>Measure the opening.<br /><span>Define the curve.</span></h2>
+                <p>
+                  Turn field dimensions into a centerline radius, check arc length, or plan stud spacing
+                  before you request a quote.
+                </p>
+              </div>
+            </header>
+            <CurveCalculator />
           </div>
         </section>
 
@@ -179,7 +200,7 @@ export default async function Home({
           <div className="shell">
             <header className="process-heading">
               <p className="signal-label">
-                <span>05</span> From file to form
+                <span>06</span> From file to form
               </p>
               <h2>
                 Complex geometry.
@@ -208,13 +229,13 @@ export default async function Home({
           <div className="shell equipment-teaser-grid">
             <div>
               <p className="signal-label signal-dark">
-                <span>06</span> Shop
+                <span>07</span> Shop
               </p>
               <h2>Hufford and Cyril Bath stretch presses, up to 20 tons.</h2>
               <p>Major forming equipment from the Anaheim shop, plus saws, a Mazak V-20, and a full quality-assurance bench.</p>
-              <a className="text-link" href="/manufacturing-equipment">
+              <Link className="text-link" href="/manufacturing-equipment">
                 Full equipment list <ArrowRight size={15} aria-hidden="true" />
-              </a>
+              </Link>
             </div>
             <ul>
               {equipment.major.map((item) => (
@@ -228,7 +249,7 @@ export default async function Home({
           <div className="shell quote-grid">
             <div className="quote-intro">
               <p className="signal-label signal-dark">
-                <span>07</span> Start a project
+                <span>08</span> Start a project
               </p>
               <h2>
                 Send the curve.

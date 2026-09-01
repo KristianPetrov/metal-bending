@@ -1,10 +1,10 @@
 import { ArrowRight, FileDown, Mail, Phone } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import PageShell from "../components/page-shell";
 import QuoteWorkspace from "../components/quote-workspace";
-import RadiusTool from "../components/radius-tool";
 import WorkGallery from "../components/work-gallery";
 import {
   company,
@@ -16,7 +16,7 @@ import {
   type SpecialtySlug,
 } from "@/lib/site-content";
 
-const staticPages = ["gallery", "manufacturing-equipment", "tools", "contact"] as const;
+const staticPages = ["gallery", "manufacturing-equipment", "contact"] as const;
 
 type PageSlug = SpecialtySlug | (typeof staticPages)[number];
 
@@ -48,9 +48,6 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   }
   if (slug === "manufacturing-equipment") {
     return { title: `Manufacturing Equipment | ${company.name}`, description: "Hufford and Cyril Bath stretch presses, support equipment, and quality-assurance tools." };
-  }
-  if (slug === "tools") {
-    return { title: `Radius Tool | ${company.name}`, description: "Calculate radius and arc length from chord width and rise." };
   }
   if (slug === "contact") {
     return { title: `Contact | ${company.name}`, description: `Call ${company.phone} or email ${company.email}.` };
@@ -94,9 +91,9 @@ export default async function ContentPage({
               {specialty.paragraphs.map((paragraph) => (
                 <p key={paragraph}>{paragraph}</p>
               ))}
-              <a className="button button-dark" href="/#quote">
+              <Link className="button button-dark" href="/#quote">
                 Request a quote <ArrowRight size={16} aria-hidden="true" />
-              </a>
+              </Link>
             </div>
           </section>
           <section className="section work-section">
@@ -180,29 +177,6 @@ export default async function ContentPage({
                   ))}
                 </ul>
               </article>
-            </div>
-          </section>
-        </main>
-      </PageShell>
-    );
-  }
-
-  if (slug === "tools") {
-    return (
-      <PageShell>
-        <main>
-          <section className="page-hero page-hero-plain">
-            <div className="shell">
-              <p className="signal-label signal-dark">
-                <span>01</span> Radius tool
-              </p>
-              <h1>Find the radius from height and width.</h1>
-              <p>Enter the rise (sagitta) and chord width — the same inputs as the original Metal Bending arc calculator.</p>
-            </div>
-          </section>
-          <section className="section">
-            <div className="shell">
-              <RadiusTool />
             </div>
           </section>
         </main>

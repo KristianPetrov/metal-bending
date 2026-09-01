@@ -1,4 +1,5 @@
 import { ArrowRight } from "lucide-react";
+import Link from "next/link";
 import SiteFooter from "./site-footer";
 import SiteHeader from "./site-header";
 
@@ -15,9 +16,9 @@ export default function PageShell({
       {children}
       <SiteFooter />
       {showMobileQuote && (
-        <a className="mobile-quote-button" href="/#quote">
+        <Link className="mobile-quote-button" href="/#quote">
           Request a quote <ArrowRight size={16} aria-hidden="true" />
-        </a>
+        </Link>
       )}
     </div>
   );
