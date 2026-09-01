@@ -4,6 +4,7 @@ import { ArrowUpRight, Menu, X } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 import { company } from "@/lib/site-content";
+import BrandMark from "./brand-mark";
 
 const links = [
   { href: "/#capabilities", label: "Capabilities" },
@@ -16,10 +17,7 @@ const links = [
 function Brand() {
   return (
     <Link className="brand" href="/" aria-label={`${company.name} home`}>
-      <span className="brand-mark" aria-hidden="true">
-        <i />
-        <i />
-      </span>
+      <BrandMark className="brand-mark" />
       <span className="brand-copy">
         <strong>Metal Bending</strong>
         <small>Corporation</small>

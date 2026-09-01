@@ -5,25 +5,32 @@ export const contentType = "image/png";
 
 export default function Icon() {
   return new ImageResponse(
-    <div
-      style={{
-        alignItems: "center",
-        background: "#0a0a0a",
-        border: "4px solid #ffffff",
-        borderRadius: "50%",
-        color: "#ffffff",
-        display: "flex",
-        fontFamily: "Arial, sans-serif",
-        fontSize: 22,
-        fontWeight: 800,
-        height: "100%",
-        justifyContent: "center",
-        letterSpacing: "-1px",
-        width: "100%",
-      }}
-    >
-      MB
-    </div>,
+    (
+      <div
+        style={{
+          alignItems: "center",
+          background: "#080a09",
+          display: "flex",
+          height: "100%",
+          justifyContent: "center",
+          width: "100%",
+        }}
+      >
+        <svg width="50" height="44" viewBox="0 0 104 92" fill="none">
+          <path
+            d="M8 84V40a16 16 0 0 1 32 0v44M40 84V40a16 16 0 0 1 32 0v44"
+            stroke="#6f7478"
+            strokeWidth="11"
+            transform="translate(7 5)"
+          />
+          <path
+            d="M8 84V40a16 16 0 0 1 32 0v44M40 84V40a16 16 0 0 1 32 0v44"
+            stroke="#ffffff"
+            strokeWidth="11"
+          />
+        </svg>
+      </div>
+    ),
     size,
   );
 }

@@ -116,28 +116,18 @@ img {
 
 .brand-mark {
   display: block;
-  height: 32px;
-  position: relative;
-  width: 40px;
+  flex-shrink: 0;
+  height: 36px;
+  overflow: visible;
+  width: 42px;
 }
 
-.brand-mark i {
-  border: 2px solid rgba(255, 255, 255, 0.9);
-  border-bottom: 0;
-  border-radius: 40px 40px 0 0;
-  bottom: 3px;
-  height: 20px;
-  left: 0;
-  position: absolute;
-  width: 40px;
+.brand-mark-face {
+  stroke: #ffffff;
 }
 
-.brand-mark i:last-child {
-  border-color: var(--ash);
-  bottom: 3px;
-  height: 12px;
-  left: 9px;
-  width: 22px;
+.brand-mark-depth {
+  stroke: var(--ash);
 }
 
 .brand-copy {
