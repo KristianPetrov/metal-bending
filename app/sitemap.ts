@@ -1,12 +1,13 @@
 import type { MetadataRoute } from "next";
+import { specialties } from "@/lib/site-content";
+
+const pages = ["", "/gallery", "/manufacturing-equipment", "/tools", "/contact", ...specialties.map((item) => `/${item.slug}`)];
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  return [
-    {
-      url: "https://www.metalbending.com",
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 1,
-    },
-  ];
+  return pages.map((path, index) => ({
+    url: `https://www.metalbending.com${path}`,
+    lastModified: new Date(),
+    changeFrequency: "monthly",
+    priority: index === 0 ? 1 : 0.7,
+  }));
 }

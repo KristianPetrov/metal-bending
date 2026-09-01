@@ -24,7 +24,7 @@ export async function generateMetadata(): Promise<Metadata> {
     metadataBase: baseUrl,
     title: "Precision Stretch Forming | Metal Bending Corporation",
     description:
-      "Custom stretch forming for curved metal framing, glass and glazing systems, ceiling components, copper gutters, aerospace parts, and specialty profiles.",
+      "Metal Bending Corporation is a worldwide leader in stretch forming. Curved metal framing, glass and glazing, ceiling components, copper gutters, and aerospace parts since 2006.",
     keywords: [
       "metal bending",
       "stretch forming",

@@ -165,7 +165,7 @@ img {
 .desktop-nav {
   align-items: center;
   display: flex;
-  gap: clamp(24px, 3vw, 48px);
+  gap: clamp(16px, 2vw, 32px);
 }
 
 .desktop-nav a {
@@ -457,10 +457,14 @@ img {
 }
 
 .hero-image img {
-  animation: image-drift 16s ease-in-out infinite alternate;
-  filter: grayscale(1) contrast(1.08);
-  object-fit: contain;
+  object-fit: cover;
   object-position: center;
+  opacity: 0;
+  transition: opacity 700ms ease;
+}
+
+.hero-image img.is-active {
+  opacity: 1;
 }
 
 .hero-grid-overlay {
@@ -801,7 +805,8 @@ img {
   padding-top: 24px;
 }
 
-.direct-contact a {
+.direct-contact a,
+.direct-contact span {
   align-items: center;
   display: flex;
   font-size: 11px;
@@ -1333,6 +1338,407 @@ legend {
   72%, 100% { left: 120%; }
 }
 
+/* Story */
+
+.story-section {
+  background: var(--paper);
+}
+
+.story-points {
+  display: grid;
+  gap: 28px;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.story-points article {
+  border-top: 1px solid var(--line);
+  padding-top: 22px;
+}
+
+.story-points h3 {
+  font-size: 18px;
+  font-weight: 540;
+  letter-spacing: -0.03em;
+  margin: 0 0 12px;
+}
+
+.story-points p,
+.specialty-copy p,
+.equipment-teaser p,
+.page-hero p {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* Capability cards */
+
+.capability-cards {
+  display: grid;
+  gap: 22px;
+  grid-template-columns: repeat(2, 1fr);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.capability-cards li:last-child {
+  grid-column: 1 / -1;
+}
+
+.capability-cards a {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: 220px 1fr;
+  min-height: 180px;
+  padding: 10px 0;
+}
+
+.capability-cards li:last-child a {
+  grid-template-columns: minmax(280px, 0.7fr) 1fr;
+}
+
+.capability-card-image {
+  background: var(--ink);
+  display: block;
+  min-height: 160px;
+  overflow: hidden;
+  position: relative;
+}
+
+.capability-card-image img {
+  object-fit: cover;
+}
+
+.capability-cards h3 {
+  font-size: clamp(22px, 2vw, 30px);
+  font-weight: 540;
+  letter-spacing: -0.035em;
+  margin: 8px 0 0;
+}
+
+.capability-cards p {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.65;
+  margin: 0;
+  max-width: 520px;
+}
+
+.capability-card-link {
+  align-items: center;
+  display: inline-flex;
+  font-family: var(--font-mono);
+  font-size: 8px;
+  gap: 8px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+/* Work */
+
+.work-section {
+  background: var(--white);
+}
+
+.work-preview {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(5, 1fr);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.work-preview a {
+  display: block;
+  min-height: 190px;
+  overflow: hidden;
+  position: relative;
+}
+
+.work-preview img {
+  object-fit: cover;
+}
+
+.work-preview span {
+  background: linear-gradient(to top, rgba(8, 10, 9, 0.72), transparent);
+  bottom: 0;
+  color: var(--white);
+  font-family: var(--font-mono);
+  font-size: 7px;
+  left: 0;
+  letter-spacing: 0.1em;
+  padding: 28px 12px 12px;
+  position: absolute;
+  right: 0;
+  text-transform: uppercase;
+}
+
+.work-more {
+  display: inline-flex;
+  margin-top: 28px;
+}
+
+.gallery-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 28px;
+}
+
+.gallery-filters button {
+  background: transparent;
+  border: 1px solid var(--line);
+  cursor: pointer;
+  font-family: var(--font-mono);
+  font-size: 8px;
+  letter-spacing: 0.1em;
+  min-height: 36px;
+  padding: 0 14px;
+  text-transform: uppercase;
+}
+
+.gallery-filters button.is-active {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--white);
+}
+
+.work-grid {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(3, 1fr);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.work-grid button {
+  aspect-ratio: 16 / 9;
+  background: var(--ink);
+  border: 0;
+  cursor: pointer;
+  overflow: hidden;
+  padding: 0;
+  position: relative;
+  width: 100%;
+}
+
+.work-grid img {
+  object-fit: cover;
+}
+
+.lightbox {
+  align-items: center;
+  display: flex;
+  inset: 0;
+  justify-content: center;
+  padding: 24px;
+  position: fixed;
+  z-index: 80;
+}
+
+.lightbox-backdrop {
+  background: rgba(8, 10, 9, 0.82);
+  border: 0;
+  inset: 0;
+  position: absolute;
+}
+
+.lightbox figure {
+  max-width: min(1100px, 100%);
+  position: relative;
+  z-index: 1;
+}
+
+.lightbox img {
+  height: auto;
+  max-height: 78vh;
+  object-fit: contain;
+  width: 100%;
+}
+
+.lightbox figcaption,
+.lightbox-close {
+  color: var(--white);
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  margin-top: 12px;
+  text-transform: uppercase;
+}
+
+.lightbox-close {
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  padding: 0;
+}
+
+/* Equipment */
+
+.equipment-teaser {
+  background: var(--paper);
+}
+
+.equipment-teaser-grid,
+.equipment-lists {
+  display: grid;
+  gap: 48px;
+  grid-template-columns: 1fr 1fr;
+}
+
+.equipment-teaser h2,
+.page-hero h1,
+.specialty-copy + .button {
+  max-width: 720px;
+}
+
+.equipment-teaser h2 {
+  font-size: clamp(36px, 4vw, 58px);
+  font-weight: 520;
+  letter-spacing: -0.05em;
+  line-height: 0.98;
+  margin: 36px 0 20px;
+}
+
+.equipment-teaser ul,
+.equipment-lists ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.equipment-teaser li,
+.equipment-lists li {
+  border-top: 1px solid var(--line);
+  font-size: 14px;
+  line-height: 1.5;
+  padding: 16px 0;
+}
+
+.equipment-lists {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.equipment-lists h2 {
+  font-size: 18px;
+  margin: 0 0 18px;
+}
+
+.equipment-page {
+  background: var(--white);
+}
+
+/* Inner pages */
+
+.page-hero {
+  background: var(--paper);
+  padding-block: clamp(56px, 7vw, 100px);
+}
+
+.page-hero-grid {
+  align-items: center;
+  display: grid;
+  gap: 48px;
+  grid-template-columns: 1fr 1fr;
+}
+
+.page-hero h1 {
+  font-size: clamp(44px, 6vw, 80px);
+  font-weight: 520;
+  letter-spacing: -0.055em;
+  line-height: 0.94;
+  margin: 28px 0 18px;
+}
+
+.page-hero-image {
+  aspect-ratio: 16 / 9;
+  background: var(--ink);
+  overflow: hidden;
+  position: relative;
+}
+
+.page-hero-image img {
+  object-fit: cover;
+}
+
+.specialty-body {
+  background: var(--white);
+  padding-top: 72px;
+}
+
+.specialty-copy {
+  display: grid;
+  gap: 22px;
+  max-width: 760px;
+}
+
+.specialty-copy .button {
+  justify-self: start;
+  margin-top: 8px;
+}
+
+.radius-tool {
+  background: var(--white);
+  border: 1px solid var(--line);
+  max-width: 760px;
+  padding: 36px;
+}
+
+.radius-fields {
+  display: grid;
+  gap: 18px;
+}
+
+.radius-fields label,
+.radius-result dt {
+  display: grid;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  gap: 8px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.radius-fields span {
+  display: grid;
+  gap: 8px;
+  grid-template-columns: 1fr 140px;
+}
+
+.radius-fields input,
+.radius-fields select {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  font-size: 16px;
+  min-height: 48px;
+  padding: 0 12px;
+}
+
+.radius-result {
+  display: grid;
+  gap: 18px;
+  grid-template-columns: 1fr 1fr;
+  margin: 28px 0 0;
+}
+
+.radius-result dd {
+  font-size: 22px;
+  font-weight: 520;
+  letter-spacing: -0.03em;
+  margin: 8px 0 0;
+}
+
+.radius-note {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.6;
+  margin: 22px 0 0;
+}
+
 /* Footer */
 
 .site-footer {
@@ -1380,7 +1786,8 @@ legend {
   gap: 14px;
 }
 
-.footer-main address a {
+.footer-main address a,
+.footer-main address span {
   align-items: center;
   color: rgba(255, 255, 255, 0.5);
   display: flex;
@@ -1441,6 +1848,19 @@ legend {
   .capability-detail {
     display: none;
   }
+
+  .capability-cards a,
+  .capability-cards li:last-child a {
+    grid-template-columns: 180px 1fr;
+  }
+
+  .work-preview {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .equipment-lists {
+    grid-template-columns: 1fr 1fr;
+  }
 }
 
 @media (max-width: 900px) {
@@ -1489,7 +1909,20 @@ legend {
   }
 
   .section-heading,
-  .process-heading {
+  .process-heading,
+  .page-hero-grid,
+  .equipment-teaser-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .story-points,
+  .capability-cards,
+  .work-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .capability-cards a,
+  .capability-cards li:last-child a {
     grid-template-columns: 1fr;
   }
 
@@ -1612,6 +2045,16 @@ legend {
   .process-heading h2,
   .quote-intro h2 {
     font-size: clamp(42px, 13vw, 60px);
+  }
+
+  .work-preview,
+  .equipment-lists,
+  .radius-result {
+    grid-template-columns: 1fr;
+  }
+
+  .radius-fields span {
+    grid-template-columns: 1fr;
   }
 
   .capability-list li {
