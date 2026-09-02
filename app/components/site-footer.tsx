@@ -1,6 +1,6 @@
 import { Mail, MapPin, Phone, Printer } from "lucide-react";
 import Link from "next/link";
-import { company } from "@/lib/site-content";
+import { company, specialties } from "@/lib/site-content";
 
 export default function SiteFooter() {
   return (
@@ -15,6 +15,17 @@ export default function SiteFooter() {
           <br />
           for ambitious geometry.
         </p>
+        <nav className="footer-links" aria-label="Services and company">
+          <strong>Explore</strong>
+          {specialties.map((specialty) => (
+            <Link key={specialty.slug} href={`/${specialty.slug}`}>
+              {specialty.navLabel}
+            </Link>
+          ))}
+          <Link href="/gallery">Project gallery</Link>
+          <Link href="/manufacturing-equipment">Equipment</Link>
+          <Link href="/contact">Contact</Link>
+        </nav>
         <address>
           <a href={company.mapHref} target="_blank" rel="noreferrer">
             <MapPin aria-hidden="true" /> {company.address}
