@@ -195,9 +195,9 @@ export default async function Home({
                 <h2>
                   Work from the
                   <br />
-                  original archive.
+                  shop floor.
                 </h2>
-                <p>Photographs from metalbending.com — framing, glazing, ceilings, copper gutters, and aerospace parts.</p>
+                <p>Framing, glazing, ceilings, copper gutters, and aerospace parts formed in Anaheim.</p>
               </div>
             </header>
             <ul className="work-preview">

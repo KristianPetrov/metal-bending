@@ -103,7 +103,7 @@ export default async function ContentPage({
                   <span>02</span> Gallery
                 </p>
                 <div>
-                  <h2>{specialty.navLabel} from the archive.</h2>
+                  <h2>{specialty.navLabel} from the shop.</h2>
                 </div>
               </header>
               <WorkGallery initialCategory={slug} images={images} />
@@ -125,7 +125,7 @@ export default async function ContentPage({
                 <span>01</span> Gallery
               </p>
               <h1>Work from the shop floor.</h1>
-              <p>Original photographs from metalbending.com, grouped by specialty.</p>
+              <p>Project photographs grouped by specialty.</p>
             </div>
           </section>
           <section className="section work-section">
