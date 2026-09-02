@@ -164,7 +164,7 @@ export default function CurveCalculator() {
       : []),
   ].join("\n");
 
-  function useInQuote() {
+  function sendToQuote() {
     if (!geometry.valid) return;
     publishCalculatorQuote({
       radius: formattedRadius,
@@ -340,7 +340,7 @@ export default function CurveCalculator() {
                   event.preventDefault();
                   return;
                 }
-                useInQuote();
+                sendToQuote();
               }}
             >
               Use in a quote <ArrowRight size={15} aria-hidden="true" />
