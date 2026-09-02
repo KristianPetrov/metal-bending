@@ -76,26 +76,24 @@ export default function PressFilm() {
         <small>Controlled tension. Smooth radius.</small>
       </div>
 
-      <div className="press-film-controls">
-        <button
-          type="button"
-          onClick={togglePlayback}
-          aria-label={isPlaying ? "Pause animation" : "Play animation"}
-          aria-pressed={isPlaying}
-        >
-          {isPlaying ? <Pause aria-hidden="true" /> : <Play aria-hidden="true" />}
-          <span>{isPlaying ? "Pause" : "Play"}</span>
-        </button>
-        <button
-          type="button"
-          onClick={toggleSound}
-          aria-label={isMuted ? "Turn animation sound on" : "Mute animation"}
-          aria-pressed={!isMuted}
-        >
-          {isMuted ? <VolumeX aria-hidden="true" /> : <Volume2 aria-hidden="true" />}
-          <span>{isMuted ? "Sound" : "Mute"}</span>
-        </button>
-      </div>
+      <button
+        type="button"
+        className="press-film-play"
+        onClick={togglePlayback}
+        aria-label={isPlaying ? "Pause animation" : "Play animation"}
+        aria-pressed={isPlaying}
+      >
+        {isPlaying ? <Pause size={13} aria-hidden="true" /> : <Play size={13} aria-hidden="true" />}
+      </button>
+      <button
+        type="button"
+        className="press-film-mute"
+        onClick={toggleSound}
+        aria-label={isMuted ? "Turn animation sound on" : "Mute animation"}
+        aria-pressed={!isMuted}
+      >
+        {isMuted ? <VolumeX size={13} aria-hidden="true" /> : <Volume2 size={13} aria-hidden="true" />}
+      </button>
     </div>
   );
 }
