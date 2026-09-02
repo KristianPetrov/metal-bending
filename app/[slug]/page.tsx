@@ -10,6 +10,7 @@ import WorkGallery from "../components/work-gallery";
 import {
   company,
   equipment,
+  featuredWork,
   imagesForSpecialty,
   specialties,
   specialtyBySlug,
@@ -73,7 +74,13 @@ export default async function ContentPage({
         isPartOf: { "@id": `${SITE_URL}/#website` },
         about: { "@id": `${SITE_URL}/#organization` },
         breadcrumb: { "@id": `${pageUrl}#breadcrumb` },
-        ...(isSpecialty(slug) ? { mainEntity: { "@id": `${pageUrl}#service` } } : {}),
+        ...(isSpecialty(slug)
+          ? { mainEntity: { "@id": `${pageUrl}#service` } }
+          : slug === "gallery"
+            ? { mainEntity: { "@id": `${pageUrl}#gallery` } }
+            : slug === "manufacturing-equipment"
+              ? { mainEntity: { "@id": `${pageUrl}#equipment` } }
+              : {}),
       },
       breadcrumbJsonLd(slug, seo.title),
       ...(isSpecialty(slug)
@@ -88,6 +95,38 @@ export default async function ContentPage({
               image: `${SITE_URL}${specialtyBySlug(slug)!.image}`,
               areaServed: "Worldwide",
               provider: { "@id": `${SITE_URL}/#organization` },
+            },
+          ]
+        : []),
+      ...(slug === "gallery"
+        ? [
+            {
+              "@type": "ImageGallery",
+              "@id": `${pageUrl}#gallery`,
+              name: "Metal Bending Corporation project gallery",
+              url: pageUrl,
+              hasPart: featuredWork.map((image) => ({
+                "@type": "ImageObject",
+                contentUrl: `${SITE_URL}${image.src}`,
+                caption: image.alt,
+              })),
+            },
+          ]
+        : []),
+      ...(slug === "manufacturing-equipment"
+        ? [
+            {
+              "@type": "ItemList",
+              "@id": `${pageUrl}#equipment`,
+              name: "Metal forming and quality-assurance equipment",
+              numberOfItems: equipment.major.length + equipment.support.length + equipment.quality.length,
+              itemListElement: [...equipment.major, ...equipment.support, ...equipment.quality].map(
+                (name, index) => ({
+                  "@type": "ListItem",
+                  position: index + 1,
+                  name,
+                }),
+              ),
             },
           ]
         : []),

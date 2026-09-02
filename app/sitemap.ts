@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { specialties } from "@/lib/site-content";
+import { featuredWork, specialties } from "@/lib/site-content";
 import { SITE_URL, staticPageSeo } from "@/lib/seo";
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -30,7 +30,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified,
       changeFrequency: "monthly" as const,
       priority: slug === "contact" ? 0.9 : 0.7,
-      images: [`${SITE_URL}${seo.image}`],
+      images:
+        slug === "gallery"
+          ? featuredWork.map((image) => `${SITE_URL}${image.src}`)
+          : [`${SITE_URL}${seo.image}`],
     })),
   ];
 }
