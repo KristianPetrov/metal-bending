@@ -2,6 +2,7 @@
 
 import { ArrowRight, Check, Clipboard, RotateCcw } from "lucide-react";
 import { useMemo, useState } from "react";
+import { publishCalculatorQuote } from "@/lib/quote-from-calculator";
 
 type Tool = "radius" | "arc" | "layout";
 type Unit = "in" | "ft" | "mm" | "cm";
@@ -140,9 +141,36 @@ export default function CurveCalculator() {
     ? Math.min(105, Math.max(18, (geometry.rise / geometry.chord) * 210))
     : 42;
 
+  const toolLabel = tools.find((item) => item.id === tool)?.label ?? "Curve geometry";
+  const formattedRadius = format(geometry.radius, unit);
+
   const summary = tool === "layout"
-    ? `Curved framing layout: ${format(geometry.radius, unit)} radius, ${format(geometry.angle)}°, ${format(geometry.arc, unit)} arc length, ${layout.studs} studs at ${format(layout.actualSpacing, unit)} on center.`
-    : `Curve geometry: ${format(geometry.radius, unit)} radius, ${format(geometry.chord, unit)} chord, ${format(geometry.rise, unit)} rise, ${format(geometry.angle)}° included angle, ${format(geometry.arc, unit)} arc length.`;
+    ? `Curved framing layout: ${formattedRadius} radius, ${format(geometry.angle)}°, ${format(geometry.arc, unit)} arc length, ${layout.studs} studs at ${format(layout.actualSpacing, unit)} on center.`
+    : `Curve geometry: ${formattedRadius} radius, ${format(geometry.chord, unit)} chord, ${format(geometry.rise, unit)} rise, ${format(geometry.angle)}° included angle, ${format(geometry.arc, unit)} arc length.`;
+
+  const quoteNotes = [
+    `From the curve calculator (${toolLabel}):`,
+    `Centerline radius: ${formattedRadius}`,
+    tool === "radius" ? `Opening width / chord: ${format(geometry.chord, unit)}` : `Included angle: ${format(geometry.angle)}°`,
+    tool === "radius" ? `Rise at center: ${format(geometry.rise, unit)}` : `Chord: ${format(geometry.chord, unit)}`,
+    tool === "radius" ? `Included angle: ${format(geometry.angle)}°` : `Rise: ${format(geometry.rise, unit)}`,
+    `Arc length: ${format(geometry.arc, unit)}`,
+    ...(tool === "layout"
+      ? [
+          `Studs / marks: ${layout.studs}`,
+          `Actual spacing: ${format(layout.actualSpacing, unit)} on center`,
+          `Maximum O.C. spacing: ${format(toNumber(spacing), unit)}`,
+        ]
+      : []),
+  ].join("\n");
+
+  function useInQuote() {
+    if (!geometry.valid) return;
+    publishCalculatorQuote({
+      radius: formattedRadius,
+      notes: quoteNotes,
+    });
+  }
 
   async function copySummary() {
     if (!geometry.valid) return;
@@ -303,7 +331,20 @@ export default function CurveCalculator() {
               {copied ? <Check size={15} aria-hidden="true" /> : <Clipboard size={15} aria-hidden="true" />}
               {copied ? "Copied" : "Copy dimensions"}
             </button>
-            <a href="#quote">Use in a quote <ArrowRight size={15} aria-hidden="true" /></a>
+            <a
+              href="#quote"
+              aria-disabled={!geometry.valid}
+              className={!geometry.valid ? "is-disabled" : ""}
+              onClick={(event) => {
+                if (!geometry.valid) {
+                  event.preventDefault();
+                  return;
+                }
+                useInQuote();
+              }}
+            >
+              Use in a quote <ArrowRight size={15} aria-hidden="true" />
+            </a>
           </div>
         </div>
       </div>
