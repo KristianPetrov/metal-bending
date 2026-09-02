@@ -13,7 +13,13 @@ import {
   ShieldCheck,
   X,
 } from "lucide-react";
-import { DragEvent, FormEvent, useRef, useState } from "react";
+import { DragEvent, FormEvent, useEffect, useRef, useState } from "react";
+import {
+  CALCULATOR_QUOTE_EVENT,
+  clearCalculatorQuote,
+  readCalculatorQuote,
+  type CalculatorQuoteDraft,
+} from "@/lib/quote-from-calculator";
 
 const projectTypes = [
   "Metal framing",
@@ -41,6 +47,9 @@ export default function QuoteWorkspace({ initialPaymentComplete = false }: { ini
   const [tab, setTab] = useState<Tab>(initialPaymentComplete ? "payment" : "quote");
   const [step, setStep] = useState(1);
   const [projectType, setProjectType] = useState(projectTypes[0]);
+  const [radius, setRadius] = useState("");
+  const [notes, setNotes] = useState("");
+  const [fromCalculator, setFromCalculator] = useState(false);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [dragging, setDragging] = useState(false);
   const [submitting, setSubmitting] = useState(false);
@@ -48,6 +57,31 @@ export default function QuoteWorkspace({ initialPaymentComplete = false }: { ini
   const [error, setError] = useState("");
   const [reference, setReference] = useState("");
   const fileInput = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    function applyCalculatorDraft(draft: CalculatorQuoteDraft) {
+      setTab("quote");
+      setStep(1);
+      setReference("");
+      setRadius(draft.radius);
+      setNotes(draft.notes);
+      setFromCalculator(true);
+      setError("");
+    }
+
+    if (window.location.hash === "#quote") {
+      const stored = readCalculatorQuote();
+      if (stored) applyCalculatorDraft(stored);
+    }
+
+    function handleCalculatorQuote(event: Event) {
+      const detail = (event as CustomEvent<CalculatorQuoteDraft>).detail;
+      if (detail?.radius && detail.notes) applyCalculatorDraft(detail);
+    }
+
+    window.addEventListener(CALCULATOR_QUOTE_EVENT, handleCalculatorQuote);
+    return () => window.removeEventListener(CALCULATOR_QUOTE_EVENT, handleCalculatorQuote);
+  }, []);
 
   const [paymentLoading, setPaymentLoading] = useState(false);
   const [paymentError, setPaymentError] = useState("");
@@ -103,6 +137,8 @@ export default function QuoteWorkspace({ initialPaymentComplete = false }: { ini
         throw new Error(data.error || "We could not send your request. Please try again.");
       }
       setReference(data.reference);
+      setFromCalculator(false);
+      clearCalculatorQuote();
     } catch (submitError) {
       setError(submitError instanceof Error ? submitError.message : "We could not send your request.");
     } finally {
@@ -188,6 +224,10 @@ export default function QuoteWorkspace({ initialPaymentComplete = false }: { ini
                 setReference("");
                 setStep(1);
                 setSelectedFile(null);
+                setRadius("");
+                setNotes("");
+                setFromCalculator(false);
+                clearCalculatorQuote();
               }}
             >
               Start another quote
@@ -195,6 +235,11 @@ export default function QuoteWorkspace({ initialPaymentComplete = false }: { ini
           </div>
         ) : (
           <form className="quote-form" onSubmit={submitQuote}>
+            {fromCalculator && (
+              <div className="calculator-confirmation" role="status">
+                <Check size={16} aria-hidden="true" /> Calculator dimensions were added to this request.
+              </div>
+            )}
             <div className="form-progress" aria-label={`Step ${step} of 3`}>
               {["Project", "Files", "Contact"].map((label, index) => {
                 const number = index + 1;
@@ -252,14 +297,21 @@ export default function QuoteWorkspace({ initialPaymentComplete = false }: { ini
                 </label>
                 <label>
                   Target radius
-                  <input name="radius" placeholder="e.g. 12 ft. inside radius" />
+                  <input
+                    name="radius"
+                    value={radius}
+                    onChange={(event) => setRadius(event.target.value)}
+                    placeholder="e.g. 12 ft. inside radius"
+                  />
                 </label>
               </div>
               <label>
                 Anything else we should know?
                 <textarea
                   name="notes"
-                  rows={3}
+                  rows={fromCalculator ? 6 : 3}
+                  value={notes}
+                  onChange={(event) => setNotes(event.target.value)}
                   placeholder="Tolerances, alloy, tangents, finish requirements, or project context…"
                 />
               </label>

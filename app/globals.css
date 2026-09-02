@@ -1105,9 +1105,11 @@ img {
   padding: 12px 0;
 }
 
-.curve-output-actions button:disabled {
+.curve-output-actions button:disabled,
+.curve-output-actions a.is-disabled {
   cursor: not-allowed;
   opacity: 0.4;
+  pointer-events: none;
 }
 
 .curve-output-actions a {
@@ -1489,7 +1491,8 @@ img {
   overflow: hidden;
 }
 
-.payment-confirmation {
+.payment-confirmation,
+.calculator-confirmation {
   align-items: center;
   background: #e8f3ed;
   border-bottom: 1px solid #c7ddd0;
@@ -1499,6 +1502,11 @@ img {
   font-weight: 600;
   gap: 8px;
   padding: 12px 18px;
+}
+
+.quote-form .calculator-confirmation {
+  border: 1px solid #c7ddd0;
+  margin-bottom: 28px;
 }
 
 .workspace-tabs {
