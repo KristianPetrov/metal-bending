@@ -1,13 +1,36 @@
 import type { MetadataRoute } from "next";
 import { specialties } from "@/lib/site-content";
-
-const pages = ["", "/gallery", "/manufacturing-equipment", "/contact", ...specialties.map((item) => `/${item.slug}`)];
+import { SITE_URL, staticPageSeo } from "@/lib/seo";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  return pages.map((path, index) => ({
-    url: `https://www.metalbending.com${path}`,
-    lastModified: new Date(),
-    changeFrequency: "monthly",
-    priority: index === 0 ? 1 : 0.7,
-  }));
+  const lastModified = new Date("2026-09-02");
+
+  return [
+    {
+      url: SITE_URL,
+      lastModified,
+      changeFrequency: "monthly",
+      priority: 1,
+      images: [
+        `${SITE_URL}/opengraph-image.jpg`,
+        `${SITE_URL}/work/hero-1.jpg`,
+        `${SITE_URL}/work/hero-2.jpg`,
+        `${SITE_URL}/work/hero-3.jpg`,
+      ],
+    },
+    ...specialties.map((specialty) => ({
+      url: `${SITE_URL}/${specialty.slug}`,
+      lastModified,
+      changeFrequency: "monthly" as const,
+      priority: 0.85,
+      images: [`${SITE_URL}${specialty.image}`],
+    })),
+    ...Object.entries(staticPageSeo).map(([slug, seo]) => ({
+      url: `${SITE_URL}/${slug}`,
+      lastModified,
+      changeFrequency: "monthly" as const,
+      priority: slug === "contact" ? 0.9 : 0.7,
+      images: [`${SITE_URL}${seo.image}`],
+    })),
+  ];
 }

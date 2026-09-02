@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
+import JsonLd from "../components/json-ld";
 import PageShell from "../components/page-shell";
 import QuoteWorkspace from "../components/quote-workspace";
 import WorkGallery from "../components/work-gallery";
@@ -15,6 +16,12 @@ import {
   story,
   type SpecialtySlug,
 } from "@/lib/site-content";
+import {
+  SITE_URL,
+  breadcrumbJsonLd,
+  pageMetadata,
+  seoForSlug,
+} from "@/lib/seo";
 
 const staticPages = ["gallery", "manufacturing-equipment", "contact"] as const;
 
@@ -36,23 +43,8 @@ export const dynamicParams = false;
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
-  if (isSpecialty(slug)) {
-    const specialty = specialtyBySlug(slug)!;
-    return {
-      title: `${specialty.navLabel} | ${company.name}`,
-      description: specialty.summary,
-    };
-  }
-  if (slug === "gallery") {
-    return { title: `Gallery | ${company.name}`, description: "Work photos from Metal Bending Corporation stretch forming projects." };
-  }
-  if (slug === "manufacturing-equipment") {
-    return { title: `Manufacturing Equipment | ${company.name}`, description: "Hufford and Cyril Bath stretch presses, support equipment, and quality-assurance tools." };
-  }
-  if (slug === "contact") {
-    return { title: `Contact | ${company.name}`, description: `Call ${company.phone} or email ${company.email}.` };
-  }
-  return {};
+  const seo = seoForSlug(slug);
+  return seo ? pageMetadata(slug, seo) : {};
 }
 
 export default async function ContentPage({
@@ -65,12 +57,49 @@ export default async function ContentPage({
   const { slug } = await params;
   const query = await searchParams;
   if (!isPageSlug(slug)) notFound();
+  const seo = seoForSlug(slug)!;
+  const pageUrl = `${SITE_URL}/${slug}`;
+  const pageType = slug === "gallery" ? "CollectionPage" : slug === "contact" ? "ContactPage" : "WebPage";
+  const pageJsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": pageType,
+        "@id": `${pageUrl}#webpage`,
+        url: pageUrl,
+        name: seo.title,
+        description: seo.description,
+        inLanguage: "en-US",
+        isPartOf: { "@id": `${SITE_URL}/#website` },
+        about: { "@id": `${SITE_URL}/#organization` },
+        breadcrumb: { "@id": `${pageUrl}#breadcrumb` },
+        ...(isSpecialty(slug) ? { mainEntity: { "@id": `${pageUrl}#service` } } : {}),
+      },
+      breadcrumbJsonLd(slug, seo.title),
+      ...(isSpecialty(slug)
+        ? [
+            {
+              "@type": "Service",
+              "@id": `${pageUrl}#service`,
+              name: specialtyBySlug(slug)!.title,
+              serviceType: `${specialtyBySlug(slug)!.title} stretch forming`,
+              description: specialtyBySlug(slug)!.summary,
+              url: pageUrl,
+              image: `${SITE_URL}${specialtyBySlug(slug)!.image}`,
+              areaServed: "Worldwide",
+              provider: { "@id": `${SITE_URL}/#organization` },
+            },
+          ]
+        : []),
+    ],
+  };
 
   if (isSpecialty(slug)) {
     const specialty = specialtyBySlug(slug)!;
     const images = imagesForSpecialty(slug);
     return (
       <PageShell>
+        <JsonLd data={pageJsonLd} />
         <main>
           <section className="page-hero">
             <div className="shell page-hero-grid">
@@ -118,6 +147,7 @@ export default async function ContentPage({
     const cat = specialties.some((item) => item.slug === query.cat) ? (query.cat as SpecialtySlug) : "all";
     return (
       <PageShell>
+        <JsonLd data={pageJsonLd} />
         <main>
           <section className="page-hero page-hero-plain">
             <div className="shell">
@@ -141,6 +171,7 @@ export default async function ContentPage({
   if (slug === "manufacturing-equipment") {
     return (
       <PageShell>
+        <JsonLd data={pageJsonLd} />
         <main>
           <section className="page-hero page-hero-plain">
             <div className="shell">
@@ -186,6 +217,7 @@ export default async function ContentPage({
 
   return (
     <PageShell>
+      <JsonLd data={pageJsonLd} />
       <main>
         <section id="quote" className="section quote-section">
           <div className="shell quote-grid">
@@ -193,11 +225,11 @@ export default async function ContentPage({
               <p className="signal-label signal-dark">
                 <span>01</span> Contact
               </p>
-              <h2>
+              <h1>
                 {company.name}
                 <br />
                 <span>Anaheim, California</span>
-              </h2>
+              </h1>
               <p>{story.approach}</p>
               <address className="direct-contact">
                 <a href={company.phoneHref}>

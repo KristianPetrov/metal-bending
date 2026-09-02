@@ -579,7 +579,7 @@ img {
 
 .section-heading h2,
 .process-heading h2,
-.quote-intro h2 {
+.quote-intro :is(h1, h2) {
   font-size: clamp(44px, 5.3vw, 80px);
   font-weight: 520;
   letter-spacing: -0.055em;
@@ -1431,11 +1431,11 @@ img {
   top: 118px;
 }
 
-.quote-intro h2 {
+.quote-intro :is(h1, h2) {
   margin-top: 52px;
 }
 
-.quote-intro h2 span {
+.quote-intro :is(h1, h2) span {
   color: var(--ash-dark);
 }
 
@@ -2673,7 +2673,7 @@ legend {
   .tools-heading h2,
   .press-film-heading h2,
   .process-heading h2,
-  .quote-intro h2 {
+  .quote-intro :is(h1, h2) {
     font-size: clamp(42px, 13vw, 60px);
   }
 
@@ -2826,7 +2826,7 @@ legend {
     gap: 52px;
   }
 
-  .quote-intro h2 {
+  .quote-intro :is(h1, h2) {
     margin-top: 38px;
   }
 
