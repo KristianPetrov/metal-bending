@@ -4,6 +4,7 @@ import Link from "next/link";
 import CurveCalculator from "./components/curve-calculator";
 import HeroSlideshow from "./components/hero-slideshow";
 import PageShell from "./components/page-shell";
+import PressFilm from "./components/press-film";
 import QuoteWorkspace from "./components/quote-workspace";
 import { company, equipment, processSteps, specialties, story } from "@/lib/site-content";
 
@@ -146,11 +147,49 @@ export default async function Home({
           </div>
         </section>
 
+        <section id="press" className="section press-film-section" aria-labelledby="press-film-title">
+          <div className="shell">
+            <header className="press-film-heading">
+              <p className="signal-label">
+                <span>04</span> Press in motion
+              </p>
+              <div>
+                <h2 id="press-film-title">
+                  Watch a straight section
+                  <br />
+                  <span>become a precise radius.</span>
+                </h2>
+                <p>
+                  A 10-second visualization of a Hufford stretch press holding material in tension while
+                  hydraulic force forms a smooth, repeatable curve.
+                </p>
+              </div>
+            </header>
+
+            <PressFilm />
+
+            <dl className="press-film-specs">
+              <div>
+                <dt>Machine</dt>
+                <dd>Hufford stretch press</dd>
+              </div>
+              <div>
+                <dt>Method</dt>
+                <dd>Simultaneous stretch + bend</dd>
+              </div>
+              <div>
+                <dt>Result</dt>
+                <dd>Smooth radius / no notching</dd>
+              </div>
+            </dl>
+          </div>
+        </section>
+
         <section id="work" className="section work-section">
           <div className="shell">
             <header className="section-heading">
               <p className="signal-label signal-dark">
-                <span>04</span> From the shop
+                <span>05</span> From the shop
               </p>
               <div>
                 <h2>
@@ -181,7 +220,7 @@ export default async function Home({
           <div className="shell">
             <header className="tools-heading">
               <div>
-                <p className="signal-label"><span>05</span> Curve lab</p>
+                <p className="signal-label"><span>06</span> Curve lab</p>
                 <p className="tools-eyebrow">Field tools / live geometry</p>
               </div>
               <div>
@@ -200,7 +239,7 @@ export default async function Home({
           <div className="shell">
             <header className="process-heading">
               <p className="signal-label">
-                <span>06</span> From file to form
+                <span>07</span> From file to form
               </p>
               <h2>
                 Complex geometry.
@@ -229,7 +268,7 @@ export default async function Home({
           <div className="shell equipment-teaser-grid">
             <div>
               <p className="signal-label signal-dark">
-                <span>07</span> Shop
+                <span>08</span> Shop
               </p>
               <h2>Hufford and Cyril Bath stretch presses, up to 20 tons.</h2>
               <p>Major forming equipment from the Anaheim shop, plus saws, a Mazak V-20, and a full quality-assurance bench.</p>
@@ -249,7 +288,7 @@ export default async function Home({
           <div className="shell quote-grid">
             <div className="quote-intro">
               <p className="signal-label signal-dark">
-                <span>08</span> Start a project
+                <span>09</span> Start a project
               </p>
               <h2>
                 Send the curve.

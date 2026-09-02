@@ -1129,6 +1129,191 @@ img {
   padding: 16px 22px;
 }
 
+/* Press film */
+
+.press-film-section {
+  background: #0d0f0e;
+  color: var(--white);
+  overflow: hidden;
+  position: relative;
+}
+
+.press-film-section::before {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+  background-size: 52px 52px;
+  content: "";
+  inset: 0;
+  mask-image: linear-gradient(to bottom, black, transparent 82%);
+  pointer-events: none;
+  position: absolute;
+}
+
+.press-film-section .shell {
+  position: relative;
+}
+
+.press-film-heading {
+  align-items: start;
+  display: grid;
+  gap: 60px;
+  grid-template-columns: 0.55fr 1.45fr;
+  margin-bottom: clamp(56px, 7vw, 94px);
+}
+
+.press-film-heading h2 {
+  font-size: clamp(44px, 5.3vw, 80px);
+  font-weight: 520;
+  letter-spacing: -0.055em;
+  line-height: 0.96;
+  margin: 0;
+}
+
+.press-film-heading h2 span {
+  color: var(--ash);
+}
+
+.press-film-heading > div > p {
+  color: rgba(255, 255, 255, 0.52);
+  font-size: 14px;
+  line-height: 1.7;
+  margin: 28px 0 0;
+  max-width: 600px;
+}
+
+.press-film-frame {
+  aspect-ratio: 16 / 9;
+  background: #070807;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 24px 24px 0 rgba(255, 255, 255, 0.035);
+  overflow: hidden;
+  position: relative;
+}
+
+.press-film-frame::after {
+  background:
+    linear-gradient(to bottom, rgba(8, 10, 9, 0.52), transparent 24%),
+    linear-gradient(to top, rgba(8, 10, 9, 0.72), transparent 32%);
+  content: "";
+  inset: 0;
+  pointer-events: none;
+  position: absolute;
+}
+
+.press-film-frame video {
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
+}
+
+.press-film-index,
+.press-film-caption,
+.press-film-controls {
+  position: absolute;
+  z-index: 1;
+}
+
+.press-film-index {
+  display: flex;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  justify-content: space-between;
+  left: 22px;
+  letter-spacing: 0.1em;
+  right: 22px;
+  top: 20px;
+}
+
+.press-film-caption {
+  bottom: 21px;
+  display: grid;
+  gap: 5px;
+  left: 22px;
+}
+
+.press-film-caption span {
+  font-size: 17px;
+  font-weight: 580;
+  letter-spacing: -0.025em;
+}
+
+.press-film-caption small {
+  color: rgba(255, 255, 255, 0.58);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.press-film-controls {
+  bottom: 18px;
+  display: flex;
+  gap: 8px;
+  right: 20px;
+}
+
+.press-film-controls button {
+  align-items: center;
+  backdrop-filter: blur(12px);
+  background: rgba(8, 10, 9, 0.74);
+  border: 1px solid rgba(255, 255, 255, 0.32);
+  color: var(--white);
+  cursor: pointer;
+  display: inline-flex;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  gap: 8px;
+  justify-content: center;
+  letter-spacing: 0.08em;
+  min-height: 42px;
+  min-width: 98px;
+  padding: 0 14px;
+  text-transform: uppercase;
+  transition: background 180ms ease, border-color 180ms ease;
+}
+
+.press-film-controls button:hover {
+  background: rgba(8, 10, 9, 0.96);
+  border-color: rgba(255, 255, 255, 0.7);
+}
+
+.press-film-controls svg {
+  height: 15px;
+  width: 15px;
+}
+
+.press-film-specs {
+  border-bottom: 1px solid var(--line-dark);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin: 0;
+}
+
+.press-film-specs > div {
+  border-left: 1px solid var(--line-dark);
+  padding: 22px 24px;
+}
+
+.press-film-specs > div:last-child {
+  border-right: 1px solid var(--line-dark);
+}
+
+.press-film-specs dt {
+  color: rgba(255, 255, 255, 0.36);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+
+.press-film-specs dd {
+  font-size: 14px;
+  font-weight: 540;
+  margin: 0;
+}
+
 /* Process */
 
 .process-section {
@@ -2330,6 +2515,7 @@ legend {
 
   .section-heading,
   .tools-heading,
+  .press-film-heading,
   .process-heading,
   .page-hero-grid,
   .equipment-teaser-grid {
@@ -2472,6 +2658,7 @@ legend {
 
   .section-heading,
   .tools-heading,
+  .press-film-heading,
   .process-heading {
     gap: 40px;
     margin-bottom: 58px;
@@ -2479,9 +2666,51 @@ legend {
 
   .section-heading h2,
   .tools-heading h2,
+  .press-film-heading h2,
   .process-heading h2,
   .quote-intro h2 {
     font-size: clamp(42px, 13vw, 60px);
+  }
+
+  .press-film-frame {
+    box-shadow: 9px 9px 0 rgba(255, 255, 255, 0.035);
+  }
+
+  .press-film-index {
+    left: 12px;
+    right: 12px;
+    top: 10px;
+  }
+
+  .press-film-index span:last-child,
+  .press-film-caption {
+    display: none;
+  }
+
+  .press-film-controls {
+    bottom: 10px;
+    left: 10px;
+    right: 10px;
+  }
+
+  .press-film-controls button {
+    flex: 1;
+    min-height: 40px;
+    min-width: 0;
+  }
+
+  .press-film-specs {
+    grid-template-columns: 1fr;
+  }
+
+  .press-film-specs > div,
+  .press-film-specs > div:last-child {
+    border-left: 1px solid var(--line-dark);
+    border-right: 1px solid var(--line-dark);
+  }
+
+  .press-film-specs > div + div {
+    border-top: 1px solid var(--line-dark);
   }
 
   .work-preview,

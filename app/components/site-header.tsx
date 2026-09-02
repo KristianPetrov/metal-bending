@@ -8,7 +8,7 @@ import BrandMark from "./brand-mark";
 
 const links = [
   { href: "/#capabilities", label: "Capabilities" },
-  { href: "/gallery", label: "Work" },
+  { href: "/#press", label: "Work" },
   { href: "/#tools", label: "Curve tools" },
   { href: "/#process", label: "Process" },
   { href: "/manufacturing-equipment", label: "Equipment" },
