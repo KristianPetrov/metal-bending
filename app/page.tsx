@@ -1,12 +1,64 @@
 import { ArrowDownRight, ArrowRight, FileDown, Mail, Phone, Printer } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import type { Metadata } from "next";
 import CurveCalculator from "./components/curve-calculator";
 import HeroSlideshow from "./components/hero-slideshow";
+import JsonLd from "./components/json-ld";
 import PageShell from "./components/page-shell";
 import PressFilm from "./components/press-film";
 import QuoteWorkspace from "./components/quote-workspace";
 import { company, equipment, processSteps, specialties, story } from "@/lib/site-content";
+import { DEFAULT_DESCRIPTION, SITE_URL } from "@/lib/seo";
+
+export async function generateMetadata({
+  searchParams,
+}: {
+  searchParams: Promise<{ payment?: string }>;
+}): Promise<Metadata> {
+  const { payment } = await searchParams;
+  return payment
+    ? {
+        alternates: { canonical: "/" },
+        robots: { index: false, follow: false },
+      }
+    : {};
+}
+
+const homeJsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": `${SITE_URL}/#webpage`,
+      url: SITE_URL,
+      name: "Precision Stretch Forming | Metal Bending Corporation",
+      description: DEFAULT_DESCRIPTION,
+      inLanguage: "en-US",
+      isPartOf: { "@id": `${SITE_URL}/#website` },
+      about: { "@id": `${SITE_URL}/#organization` },
+      primaryImageOfPage: {
+        "@type": "ImageObject",
+        url: `${SITE_URL}/opengraph-image.jpg`,
+        width: 1200,
+        height: 630,
+      },
+      mainEntity: { "@id": `${SITE_URL}/#stretch-forming-video` },
+    },
+    {
+      "@type": "VideoObject",
+      "@id": `${SITE_URL}/#stretch-forming-video`,
+      name: "How a Hufford stretch press forms a precise metal curve",
+      description:
+        "A short visualization of a Hufford stretch press holding a straight metal section in tension while hydraulic force forms a smooth, repeatable radius.",
+      thumbnailUrl: `${SITE_URL}/mbc-animation-poster.jpg`,
+      contentUrl: `${SITE_URL}/mbc-animation.mp4`,
+      duration: "PT10S",
+      inLanguage: "en-US",
+      publisher: { "@id": `${SITE_URL}/#organization` },
+    },
+  ],
+};
 
 export default async function Home({
   searchParams,
@@ -17,6 +69,7 @@ export default async function Home({
 
   return (
     <PageShell>
+      <JsonLd data={homeJsonLd} />
       <main>
         <section className="hero" aria-labelledby="hero-title">
           <div className="shell hero-layout">

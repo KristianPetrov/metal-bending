@@ -1,6 +1,6 @@
 import { Mail, MapPin, Phone, Printer } from "lucide-react";
 import Link from "next/link";
-import { company } from "@/lib/site-content";
+import { company, designer, specialties } from "@/lib/site-content";
 
 export default function SiteFooter() {
   return (
@@ -15,6 +15,17 @@ export default function SiteFooter() {
           <br />
           for ambitious geometry.
         </p>
+        <nav className="footer-links" aria-label="Services and company">
+          <strong>Explore</strong>
+          {specialties.map((specialty) => (
+            <Link key={specialty.slug} href={`/${specialty.slug}`}>
+              {specialty.navLabel}
+            </Link>
+          ))}
+          <Link href="/gallery">Project gallery</Link>
+          <Link href="/manufacturing-equipment">Equipment</Link>
+          <Link href="/contact">Contact</Link>
+        </nav>
         <address>
           <a href={company.mapHref} target="_blank" rel="noreferrer">
             <MapPin aria-hidden="true" /> {company.address}
@@ -31,7 +42,13 @@ export default function SiteFooter() {
         </address>
       </div>
       <div className="shell footer-bottom">
-        <span>© {new Date().getFullYear()} {company.name}. All rights reserved.</span>
+        <div className="footer-legal">
+          <span>© {new Date().getFullYear()} {company.name}. All rights reserved.</span>
+          <a href={designer.url} target="_blank" rel="noopener noreferrer">
+            Website designed by {designer.name}
+            <span>www.setfreedigitaldisciples.com</span>
+          </a>
+        </div>
         <span>Forming since {company.established}</span>
       </div>
     </footer>
