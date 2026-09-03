@@ -2034,7 +2034,7 @@ legend {
 
 .capability-cards {
   display: grid;
-  gap: 22px;
+  gap: 40px 28px;
   grid-template-columns: repeat(2, 1fr);
   list-style: none;
   margin: 0;
@@ -2047,22 +2047,41 @@ legend {
 
 .capability-cards a {
   display: grid;
-  gap: 14px;
-  grid-template-columns: 220px 1fr;
-  min-height: 180px;
-  padding: 10px 0;
-}
-
-.capability-cards li:last-child a {
-  grid-template-columns: minmax(280px, 0.7fr) 1fr;
+  gap: 18px;
+  grid-template-columns: 1fr;
+  min-height: 0;
+  padding: 4px 0;
 }
 
 .capability-card-image {
+  aspect-ratio: 16 / 10;
   background: var(--ink);
   display: block;
-  min-height: 160px;
+  min-height: 280px;
   overflow: hidden;
   position: relative;
+}
+
+.capability-cards li:nth-child(odd) .capability-card-image {
+  aspect-ratio: 4 / 3;
+  min-height: 380px;
+}
+
+.capability-cards li:last-child a {
+  align-items: center;
+  gap: 36px;
+  grid-template-columns: minmax(560px, 1.45fr) minmax(0, 1fr);
+  min-height: 0;
+}
+
+.capability-cards li:last-child .capability-card-image {
+  aspect-ratio: 16 / 9;
+  min-height: 420px;
+}
+
+.capability-card-copy {
+  display: grid;
+  gap: 10px;
 }
 
 .capability-card-image img {
@@ -2497,9 +2516,21 @@ legend {
     display: none;
   }
 
-  .capability-cards a,
   .capability-cards li:last-child a {
-    grid-template-columns: 180px 1fr;
+    gap: 24px;
+    grid-template-columns: minmax(420px, 1.2fr) minmax(0, 1fr);
+  }
+
+  .capability-card-image {
+    min-height: 240px;
+  }
+
+  .capability-cards li:nth-child(odd) .capability-card-image {
+    min-height: 300px;
+  }
+
+  .capability-cards li:last-child .capability-card-image {
+    min-height: 320px;
   }
 
   .work-preview {
@@ -2584,6 +2615,14 @@ legend {
   .capability-cards a,
   .capability-cards li:last-child a {
     grid-template-columns: 1fr;
+    min-height: 0;
+  }
+
+  .capability-card-image,
+  .capability-cards li:nth-child(odd) .capability-card-image,
+  .capability-cards li:last-child .capability-card-image {
+    aspect-ratio: 16 / 10;
+    min-height: 220px;
   }
 
   .tools-heading > div:first-child {

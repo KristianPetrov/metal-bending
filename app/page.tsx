@@ -185,13 +185,15 @@ export default async function Home({
                 <li key={specialty.slug}>
                   <a href={`/${specialty.slug}`}>
                     <span className="capability-card-image">
-                      <Image src={specialty.image} alt={specialty.title} fill sizes="(max-width: 700px) 100vw, 40vw" />
+                      <Image src={specialty.image} alt={specialty.title} fill sizes="(max-width: 900px) 100vw, (max-width: 1060px) 50vw, 48vw" />
                     </span>
-                    <span className="capability-number">{specialty.number}</span>
-                    <h3>{specialty.title}</h3>
-                    <p>{specialty.summary}</p>
-                    <span className="capability-card-link">
-                      View specialty <ArrowRight size={15} aria-hidden="true" />
+                    <span className="capability-card-copy">
+                      <span className="capability-number">{specialty.number}</span>
+                      <h3>{specialty.title}</h3>
+                      <p>{specialty.summary}</p>
+                      <span className="capability-card-link">
+                        View specialty <ArrowRight size={15} aria-hidden="true" />
+                      </span>
                     </span>
                   </a>
                 </li>
