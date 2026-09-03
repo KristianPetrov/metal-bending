@@ -2436,6 +2436,7 @@ legend {
 }
 
 .footer-bottom {
+  align-items: end;
   border-top: 1px solid var(--line-dark);
   color: rgba(255, 255, 255, 0.34);
   display: flex;
@@ -2446,6 +2447,21 @@ legend {
   padding-bottom: 24px;
   padding-top: 24px;
   text-transform: uppercase;
+}
+
+.footer-legal {
+  display: grid;
+  gap: 8px;
+}
+
+.footer-legal a {
+  color: rgba(255, 255, 255, 0.5);
+  display: grid;
+  gap: 4px;
+}
+
+.footer-legal a:hover {
+  color: var(--white);
 }
 
 .mobile-quote-button {

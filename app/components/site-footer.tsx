@@ -1,6 +1,6 @@
 import { Mail, MapPin, Phone, Printer } from "lucide-react";
 import Link from "next/link";
-import { company, specialties } from "@/lib/site-content";
+import { company, designer, specialties } from "@/lib/site-content";
 
 export default function SiteFooter() {
   return (
@@ -42,7 +42,13 @@ export default function SiteFooter() {
         </address>
       </div>
       <div className="shell footer-bottom">
-        <span>© {new Date().getFullYear()} {company.name}. All rights reserved.</span>
+        <div className="footer-legal">
+          <span>© {new Date().getFullYear()} {company.name}. All rights reserved.</span>
+          <a href={designer.url} target="_blank" rel="noopener noreferrer">
+            Website designed by {designer.name}
+            <span>www.setfreedigitaldisciples.com</span>
+          </a>
+        </div>
         <span>Forming since {company.established}</span>
       </div>
     </footer>

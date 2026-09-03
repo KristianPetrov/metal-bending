@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import { company, specialties } from "@/lib/site-content";
+import { company, designer, specialties } from "@/lib/site-content";
 import { DEFAULT_DESCRIPTION, SITE_URL } from "@/lib/seo";
 import "./globals.css";
 
@@ -22,8 +22,11 @@ export const metadata: Metadata = {
   },
   description: DEFAULT_DESCRIPTION,
   applicationName: company.name,
-  authors: [{ name: company.name, url: SITE_URL }],
-  creator: company.name,
+  authors: [
+    { name: company.name, url: SITE_URL },
+    { name: designer.name, url: designer.url },
+  ],
+  creator: designer.name,
   publisher: company.name,
   category: "Manufacturing",
   keywords: [
@@ -146,6 +149,11 @@ const organizationJsonLd = {
       description: DEFAULT_DESCRIPTION,
       inLanguage: "en-US",
       publisher: { "@id": `${SITE_URL}/#organization` },
+      creator: {
+        "@type": "Organization",
+        name: designer.name,
+        url: designer.url,
+      },
     },
   ],
 };

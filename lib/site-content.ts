@@ -27,6 +27,11 @@ export const company = {
   orderForm: "/docs/order-form.pdf",
 };
 
+export const designer = {
+  name: "Set Free Digital Disciples",
+  url: "https://www.setfreedigitaldisciples.com",
+};
+
 export const story = {
   intro:
     "Metal Bending Corporation is a worldwide leader and innovator in the metal curving industry. We use the stretch forming technique to take just about any customer-supplied metal and achieve a precise radius. Complexity is not a problem. By mastering this technique, there are virtually no limits to what can be curved — metal framing, storefront, ceiling systems, and even aircraft components, with great repeatability.",
