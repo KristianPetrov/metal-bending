@@ -11,6 +11,19 @@ export type WorkImage = {
   src: string;
   alt: string;
   category: WorkCategory;
+  featured?: boolean;
+};
+
+export type SpecialtyProfile = {
+  label: string;
+  note: string;
+};
+
+export type SpecialtyShowcase = {
+  heading: string;
+  boardSrc: string;
+  boardAlt: string;
+  profiles: SpecialtyProfile[];
 };
 
 export const company = {
@@ -51,7 +64,9 @@ export const specialties: {
   detail: string;
   summary: string;
   image: string;
+  leadImage?: string;
   paragraphs: string[];
+  showcase?: SpecialtyShowcase;
 }[] = [
   {
     number: "01",
@@ -61,11 +76,24 @@ export const specialties: {
     detail: "Track, angle, hat channel",
     summary: "Track, angle, hat channel, expansion joints, and plaster molds for soffits, arches, curved walls, and domes.",
     image: "/work/framing-3.jpg",
+    leadImage: "/work/framing-9.jpg",
     paragraphs: [
       "Stretch forming metal framing correctly requires engineering, imagination, and attention to detail. Our process keeps extremely tight tolerances while maintaining the overall profile shape.",
       "Along with track and angle, Metal Bending Corporation can curve hat channels, expansion joints, and plaster molds. These shapes can be curved for soffits, arches, curved walls, and domes with great repeatability.",
       "Because material is never notched or crimped, we can smoothly curve track as wide as 12 inches and as thick as 12 gauge. Hydraulic pressure lets us form custom profiles such as sloped track and sloped angle without distortion.",
     ],
+    showcase: {
+      heading: "Framing profiles",
+      boardSrc: "/work/framing-8.jpg",
+      boardAlt: "Style board of curved galvanized framing profiles including track, angle, hat channel, and custom sections",
+      profiles: [
+        { label: "Track", note: "Smooth curves as wide as 12 inches and as thick as 12 gauge, never notched or crimped." },
+        { label: "Angle", note: "Including custom sloped angle, formed without distortion." },
+        { label: "Hat channel", note: "For soffits, arches, curved walls, and domes." },
+        { label: "Expansion joints", note: "Curved with great repeatability." },
+        { label: "Plaster molds", note: "Formed alongside track and angle." },
+      ],
+    },
   },
   {
     number: "02",
@@ -103,11 +131,24 @@ export const specialties: {
     detail: "Half-round, K-style, custom",
     summary: "Seamless custom-curved copper, aluminum, zinc, and galvanized gutters that follow the fascia.",
     image: "/work/copper-7.jpg",
+    leadImage: "/work/copper-14.jpg",
     paragraphs: [
       "Copper is a popular gutter material for upscale homes. It is elegant, corrosion-resistant, and strong enough to follow complex architectural fascia as a seamless custom curve.",
       "Material thickness depends on the gutter profile, size, and radius. Typically, copper half-round and K-style gutter should be 20 ounce or thicker, while aluminum half-round and K-style should be .050 or thicker. Rhine zinc, lead-coated copper, galvanized, and paint-lock can be curved as well.",
       "Double bead, quarter round, modern, box, fascia, and just about any custom gutter can be curved with no distortion to the profile. For coping, scuppers, and gate caps, call before ordering material.",
     ],
+    showcase: {
+      heading: "Gutter profiles",
+      boardSrc: "/work/copper-13.jpg",
+      boardAlt: "Style board of curved copper gutter profiles including half-round, K-style, box, and fascia",
+      profiles: [
+        { label: "Half-round", note: "Copper typically 20 ounce or thicker; aluminum .050 or thicker." },
+        { label: "K-style", note: "Same thickness guidance as half-round, formed without distorting the profile." },
+        { label: "Box", note: "Curved with no distortion to the profile." },
+        { label: "Fascia", note: "Seamless custom curves that follow the fascia of the home." },
+        { label: "Custom", note: "Double bead, quarter round, modern, and other custom gutter shapes." },
+      ],
+    },
   },
   {
     number: "05",
@@ -130,6 +171,8 @@ export const workImages: WorkImage[] = [
   { src: "/work/hero-3.jpg", alt: "Precision-formed architectural metal", category: "shop" },
   { src: "/work/hero-4.jpg", alt: "Stacked curved extrusions", category: "shop" },
   { src: "/work/hero-5.jpg", alt: "Finished stretch-formed parts", category: "shop" },
+  { src: "/work/framing-8.jpg", alt: "Style board of curved galvanized framing profiles including track, angle, hat channel, and custom sections", category: "curved-metal-framing", featured: true },
+  { src: "/work/framing-9.jpg", alt: "Close-up of two curved galvanized framing tracks", category: "curved-metal-framing", featured: true },
   { src: "/work/framing-1.jpg", alt: "Curved metal framing track", category: "curved-metal-framing" },
   { src: "/work/framing-2.jpg", alt: "Formed framing for an arch", category: "curved-metal-framing" },
   { src: "/work/framing-3.jpg", alt: "Wide curved track without notching", category: "curved-metal-framing" },
@@ -147,6 +190,8 @@ export const workImages: WorkImage[] = [
   { src: "/work/ceiling-3.jpg", alt: "Architectural ceiling extrusions", category: "curved-ceiling-components" },
   { src: "/work/ceiling-4.jpg", alt: "Vault and arch ceiling members", category: "curved-ceiling-components" },
   { src: "/work/ceiling-5.jpg", alt: "Custom brake-shape ceiling profiles", category: "curved-ceiling-components" },
+  { src: "/work/copper-13.jpg", alt: "Style board of curved copper gutter profiles including half-round, K-style, box, and fascia", category: "copper-gutters", featured: true },
+  { src: "/work/copper-14.jpg", alt: "Detail lineup of curved copper half-round and K-style gutter profiles", category: "copper-gutters", featured: true },
   { src: "/work/copper-1.jpg", alt: "Curved copper gutter section", category: "copper-gutters" },
   { src: "/work/copper-2.jpg", alt: "Half-round copper gutter", category: "copper-gutters" },
   { src: "/work/copper-3.jpg", alt: "K-style copper gutter curve", category: "copper-gutters" },
@@ -167,9 +212,11 @@ export const workImages: WorkImage[] = [
 
 export const featuredWork = workImages.filter((image) =>
   [
+    "/work/framing-8.jpg",
     "/work/framing-3.jpg",
     "/work/glass-2.jpg",
     "/work/ceiling-1.jpg",
+    "/work/copper-13.jpg",
     "/work/copper-7.jpg",
     "/work/aerospace-1.jpg",
     "/work/hero-4.jpg",
@@ -217,4 +264,14 @@ export function specialtyBySlug(slug: string) {
 
 export function imagesForSpecialty(slug: SpecialtySlug) {
   return workImages.filter((image) => image.category === slug);
+}
+
+export function leadImageForSpecialty(slug: SpecialtySlug) {
+  const specialty = specialtyBySlug(slug);
+  const images = imagesForSpecialty(slug);
+  if (!specialty) return undefined;
+  if (specialty.leadImage) {
+    return images.find((image) => image.src === specialty.leadImage);
+  }
+  return images.find((image) => image.src !== specialty.image);
 }
