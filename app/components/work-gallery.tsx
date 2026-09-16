@@ -61,8 +61,9 @@ export default function WorkGallery({
       <ul className="work-grid">
         {visible.map((image) => {
           const featured = Boolean(featuredLayout && image.featured);
+          const studio = Boolean(image.studio);
           return (
-            <li key={image.src} className={featured ? "is-featured" : undefined}>
+            <li key={image.src} className={[featured ? "is-featured" : "", studio ? "is-studio" : ""].filter(Boolean).join(" ") || undefined}>
               <button type="button" onClick={() => setActive(image.src)} aria-label={`View ${image.alt}`}>
                 <Image
                   src={image.src}

@@ -15,31 +15,36 @@ export default function SpecialtyView({ slug }: { slug: SpecialtySlug }) {
   const images = imagesForSpecialty(slug);
   const lead = leadImageForSpecialty(slug);
   const heroPhoto = workImages.find((image) => image.src === specialty.image);
+  const catalogSrcs = new Set(specialty.catalog?.flatMap((group) => group.items.map((item) => item.src)) ?? []);
+  const galleryImages = images.filter((image) => !catalogSrcs.has(image.src));
+  const leadIsStudio = Boolean(lead?.studio);
 
   return (
     <main className="specialty-page">
-      <section className="page-hero specialty-hero">
-        <div className="specialty-hero-media">
-          <Image
-            src={specialty.image}
-            alt={heroPhoto?.alt ?? specialty.title}
-            fill
-            preload
-            fetchPriority="high"
-            sizes="100vw"
-            quality={85}
-          />
-        </div>
-        <div className="shell specialty-hero-content">
-          <p className="signal-label">
-            <span>{specialty.number}</span> Specialty
-          </p>
-          <h1>{specialty.title}</h1>
-          <p className="specialty-hero-lede">{specialty.summary}</p>
-          <p className="specialty-hero-detail">{specialty.detail}</p>
-          <Link className="button button-primary" href="/#quote">
-            Request a quote <ArrowRight size={16} aria-hidden="true" />
-          </Link>
+      <section className="page-hero">
+        <div className="shell page-hero-grid">
+          <div>
+            <p className="signal-label signal-dark">
+              <span>{specialty.number}</span> Specialty
+            </p>
+            <h1>{specialty.title}</h1>
+            <p>{specialty.summary}</p>
+            <p className="specialty-kicker">{specialty.detail}</p>
+            <Link className="button button-dark specialty-hero-cta" href="/#quote">
+              Request a quote <ArrowRight size={16} aria-hidden="true" />
+            </Link>
+          </div>
+          <div className="page-hero-image">
+            <Image
+              src={specialty.image}
+              alt={heroPhoto?.alt ?? specialty.title}
+              fill
+              preload
+              fetchPriority="high"
+              sizes="(max-width: 900px) 100vw, 48vw"
+              quality={85}
+            />
+          </div>
         </div>
       </section>
 
@@ -55,7 +60,7 @@ export default function SpecialtyView({ slug }: { slug: SpecialtySlug }) {
           </div>
           {lead && (
             <figure className="specialty-lead">
-              <div className="specialty-lead-image">
+              <div className={`specialty-lead-image${leadIsStudio ? " is-studio" : ""}`}>
                 <Image src={lead.src} alt={lead.alt} fill sizes="(max-width: 900px) 100vw, 42vw" quality={85} />
               </div>
               <figcaption>{lead.alt}</figcaption>
@@ -64,36 +69,36 @@ export default function SpecialtyView({ slug }: { slug: SpecialtySlug }) {
         </div>
       </section>
 
-      {specialty.showcase && (
-        <section className="section profile-showcase" aria-labelledby={`${slug}-profiles-title`}>
+      {specialty.catalog && (
+        <section className="section catalog-section" aria-labelledby={`${slug}-catalog-title`}>
           <div className="shell">
             <header className="section-heading">
-              <p className="signal-label">
+              <p className="signal-label signal-dark">
                 <span>02</span> Profiles
               </p>
               <div>
-                <h2 id={`${slug}-profiles-title`}>{specialty.showcase.heading}</h2>
+                <h2 id={`${slug}-catalog-title`}>{specialty.catalogHeading ?? "Profiles"}</h2>
                 <p>{specialty.detail}.</p>
               </div>
             </header>
-            <div className="profile-showcase-layout">
-              <figure className="profile-board">
-                <Image
-                  src={specialty.showcase.boardSrc}
-                  alt={specialty.showcase.boardAlt}
-                  fill
-                  sizes="(max-width: 900px) 100vw, 62vw"
-                  quality={85}
-                />
-              </figure>
-              <ul className="profile-cards">
-                {specialty.showcase.profiles.map((profile) => (
-                  <li key={profile.label}>
-                    <strong>{profile.label}</strong>
-                    <p>{profile.note}</p>
-                  </li>
-                ))}
-              </ul>
+            <div className="catalog-groups">
+              {specialty.catalog.map((group) => (
+                <article key={group.heading}>
+                  <h3>{group.heading}</h3>
+                  <ul>
+                    {group.items.map((item) => (
+                      <li key={item.src}>
+                        <figure className="catalog-card">
+                          <div className="catalog-card-image">
+                            <Image src={item.src} alt={item.alt} fill sizes="(max-width: 900px) 100vw, 33vw" quality={85} />
+                          </div>
+                          <figcaption>{item.label}</figcaption>
+                        </figure>
+                      </li>
+                    ))}
+                  </ul>
+                </article>
+              ))}
             </div>
           </div>
         </section>
@@ -103,13 +108,13 @@ export default function SpecialtyView({ slug }: { slug: SpecialtySlug }) {
         <div className="shell">
           <header className="section-heading">
             <p className="signal-label signal-dark">
-              <span>{specialty.showcase ? "03" : "02"}</span> Gallery
+              <span>{specialty.catalog ? "03" : "02"}</span> Gallery
             </p>
             <div>
               <h2>{specialty.navLabel} from the shop.</h2>
             </div>
           </header>
-          <WorkGallery initialCategory={slug} images={images} showFilters={false} />
+          <WorkGallery initialCategory={slug} images={galleryImages} showFilters={false} />
         </div>
       </section>
     </main>
