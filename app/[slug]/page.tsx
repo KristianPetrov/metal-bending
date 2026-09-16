@@ -1,17 +1,15 @@
-import { ArrowRight, FileDown, Mail, Phone } from "lucide-react";
-import Image from "next/image";
-import Link from "next/link";
+import { FileDown, Mail, Phone } from "lucide-react";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import JsonLd from "../components/json-ld";
 import PageShell from "../components/page-shell";
 import QuoteWorkspace from "../components/quote-workspace";
+import SpecialtyView from "../components/specialty-view";
 import WorkGallery from "../components/work-gallery";
 import {
   company,
   equipment,
   featuredWork,
-  imagesForSpecialty,
   specialties,
   specialtyBySlug,
   story,
@@ -134,50 +132,10 @@ export default async function ContentPage({
   };
 
   if (isSpecialty(slug)) {
-    const specialty = specialtyBySlug(slug)!;
-    const images = imagesForSpecialty(slug);
     return (
       <PageShell>
         <JsonLd data={pageJsonLd} />
-        <main>
-          <section className="page-hero">
-            <div className="shell page-hero-grid">
-              <div>
-                <p className="signal-label signal-dark">
-                  <span>{specialty.number}</span> Specialty
-                </p>
-                <h1>{specialty.title}</h1>
-                <p>{specialty.summary}</p>
-              </div>
-              <div className="page-hero-image">
-                <Image src={specialty.image} alt={specialty.title} fill sizes="(max-width: 900px) 100vw, 48vw" priority />
-              </div>
-            </div>
-          </section>
-          <section className="section specialty-body">
-            <div className="shell specialty-copy">
-              {specialty.paragraphs.map((paragraph) => (
-                <p key={paragraph}>{paragraph}</p>
-              ))}
-              <Link className="button button-dark" href="/#quote">
-                Request a quote <ArrowRight size={16} aria-hidden="true" />
-              </Link>
-            </div>
-          </section>
-          <section className="section work-section">
-            <div className="shell">
-              <header className="section-heading">
-                <p className="signal-label signal-dark">
-                  <span>02</span> Gallery
-                </p>
-                <div>
-                  <h2>{specialty.navLabel} from the shop.</h2>
-                </div>
-              </header>
-              <WorkGallery initialCategory={slug} images={images} />
-            </div>
-          </section>
-        </main>
+        <SpecialtyView slug={slug} />
       </PageShell>
     );
   }

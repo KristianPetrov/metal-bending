@@ -11,6 +11,19 @@ export type WorkImage = {
   src: string;
   alt: string;
   category: WorkCategory;
+  featured?: boolean;
+  studio?: boolean;
+};
+
+export type CatalogItem = {
+  src: string;
+  alt: string;
+  label: string;
+};
+
+export type CatalogGroup = {
+  heading: string;
+  items: CatalogItem[];
 };
 
 export const company = {
@@ -51,7 +64,10 @@ export const specialties: {
   detail: string;
   summary: string;
   image: string;
+  leadImage?: string;
   paragraphs: string[];
+  catalogHeading?: string;
+  catalog?: CatalogGroup[];
 }[] = [
   {
     number: "01",
@@ -61,10 +77,34 @@ export const specialties: {
     detail: "Track, angle, hat channel",
     summary: "Track, angle, hat channel, expansion joints, and plaster molds for soffits, arches, curved walls, and domes.",
     image: "/work/framing-3.jpg",
+    leadImage: "/work/framing-10.jpg",
     paragraphs: [
       "Stretch forming metal framing correctly requires engineering, imagination, and attention to detail. Our process keeps extremely tight tolerances while maintaining the overall profile shape.",
       "Along with track and angle, Metal Bending Corporation can curve hat channels, expansion joints, and plaster molds. These shapes can be curved for soffits, arches, curved walls, and domes with great repeatability.",
       "Because material is never notched or crimped, we can smoothly curve track as wide as 12 inches and as thick as 12 gauge. Hydraulic pressure lets us form custom profiles such as sloped track and sloped angle without distortion.",
+    ],
+    catalogHeading: "Framing profiles",
+    catalog: [
+      {
+        heading: "Hat channel",
+        items: [
+          {
+            src: "/work/framing-10.jpg",
+            alt: "Curved galvanized hat-channel framing on a white studio background",
+            label: "Hat channel",
+          },
+        ],
+      },
+      {
+        heading: "Track and U-channel",
+        items: [
+          {
+            src: "/work/framing-11.jpg",
+            alt: "Curved galvanized track and U-channel framing on a white studio background",
+            label: "Track / U-channel",
+          },
+        ],
+      },
     ],
   },
   {
@@ -103,10 +143,44 @@ export const specialties: {
     detail: "Half-round, K-style, custom",
     summary: "Seamless custom-curved copper, aluminum, zinc, and galvanized gutters that follow the fascia.",
     image: "/work/copper-7.jpg",
+    leadImage: "/work/copper-16.jpg",
     paragraphs: [
       "Copper is a popular gutter material for upscale homes. It is elegant, corrosion-resistant, and strong enough to follow complex architectural fascia as a seamless custom curve.",
       "Material thickness depends on the gutter profile, size, and radius. Typically, copper half-round and K-style gutter should be 20 ounce or thicker, while aluminum half-round and K-style should be .050 or thicker. Rhine zinc, lead-coated copper, galvanized, and paint-lock can be curved as well.",
       "Double bead, quarter round, modern, box, fascia, and just about any custom gutter can be curved with no distortion to the profile. For coping, scuppers, and gate caps, call before ordering material.",
+    ],
+    catalogHeading: "Radius gutter profiles",
+    catalog: [
+      {
+        heading: "Radius K-style gutters",
+        items: [
+          {
+            src: "/work/copper-16.jpg",
+            alt: "Curved copper K-style gutter on a white studio background",
+            label: "K-style",
+          },
+        ],
+      },
+      {
+        heading: "Radius half-round gutters",
+        items: [
+          {
+            src: "/work/copper-17.jpg",
+            alt: "Curved copper half-round gutter on a white studio background",
+            label: "Half-round",
+          },
+        ],
+      },
+      {
+        heading: "Radius brownstone gutters",
+        items: [
+          {
+            src: "/work/copper-18.jpg",
+            alt: "Curved copper brownstone gutter profile on a white studio background",
+            label: "Brownstone",
+          },
+        ],
+      },
     ],
   },
   {
@@ -130,6 +204,8 @@ export const workImages: WorkImage[] = [
   { src: "/work/hero-3.jpg", alt: "Precision-formed architectural metal", category: "shop" },
   { src: "/work/hero-4.jpg", alt: "Stacked curved extrusions", category: "shop" },
   { src: "/work/hero-5.jpg", alt: "Finished stretch-formed parts", category: "shop" },
+  { src: "/work/framing-10.jpg", alt: "Curved galvanized hat-channel framing on a white studio background", category: "curved-metal-framing", studio: true },
+  { src: "/work/framing-11.jpg", alt: "Curved galvanized track and U-channel framing on a white studio background", category: "curved-metal-framing", studio: true },
   { src: "/work/framing-1.jpg", alt: "Curved metal framing track", category: "curved-metal-framing" },
   { src: "/work/framing-2.jpg", alt: "Formed framing for an arch", category: "curved-metal-framing" },
   { src: "/work/framing-3.jpg", alt: "Wide curved track without notching", category: "curved-metal-framing" },
@@ -147,6 +223,9 @@ export const workImages: WorkImage[] = [
   { src: "/work/ceiling-3.jpg", alt: "Architectural ceiling extrusions", category: "curved-ceiling-components" },
   { src: "/work/ceiling-4.jpg", alt: "Vault and arch ceiling members", category: "curved-ceiling-components" },
   { src: "/work/ceiling-5.jpg", alt: "Custom brake-shape ceiling profiles", category: "curved-ceiling-components" },
+  { src: "/work/copper-16.jpg", alt: "Curved copper K-style gutter on a white studio background", category: "copper-gutters", studio: true },
+  { src: "/work/copper-17.jpg", alt: "Curved copper half-round gutter on a white studio background", category: "copper-gutters", studio: true },
+  { src: "/work/copper-18.jpg", alt: "Curved copper brownstone gutter profile on a white studio background", category: "copper-gutters", studio: true },
   { src: "/work/copper-1.jpg", alt: "Curved copper gutter section", category: "copper-gutters" },
   { src: "/work/copper-2.jpg", alt: "Half-round copper gutter", category: "copper-gutters" },
   { src: "/work/copper-3.jpg", alt: "K-style copper gutter curve", category: "copper-gutters" },
@@ -167,9 +246,12 @@ export const workImages: WorkImage[] = [
 
 export const featuredWork = workImages.filter((image) =>
   [
+    "/work/framing-10.jpg",
     "/work/framing-3.jpg",
     "/work/glass-2.jpg",
     "/work/ceiling-1.jpg",
+    "/work/copper-16.jpg",
+    "/work/copper-18.jpg",
     "/work/copper-7.jpg",
     "/work/aerospace-1.jpg",
     "/work/hero-4.jpg",
@@ -217,4 +299,14 @@ export function specialtyBySlug(slug: string) {
 
 export function imagesForSpecialty(slug: SpecialtySlug) {
   return workImages.filter((image) => image.category === slug);
+}
+
+export function leadImageForSpecialty(slug: SpecialtySlug) {
+  const specialty = specialtyBySlug(slug);
+  const images = imagesForSpecialty(slug);
+  if (!specialty) return undefined;
+  if (specialty.leadImage) {
+    return images.find((image) => image.src === specialty.leadImage);
+  }
+  return images.find((image) => image.src !== specialty.image);
 }
