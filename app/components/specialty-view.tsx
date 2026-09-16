@@ -42,7 +42,6 @@ export default function SpecialtyView({ slug }: { slug: SpecialtySlug }) {
               preload
               fetchPriority="high"
               sizes="(max-width: 900px) 100vw, 48vw"
-              quality={85}
             />
           </div>
         </div>
@@ -61,7 +60,7 @@ export default function SpecialtyView({ slug }: { slug: SpecialtySlug }) {
           {lead && (
             <figure className="specialty-lead">
               <div className={`specialty-lead-image${leadIsStudio ? " is-studio" : ""}`}>
-                <Image src={lead.src} alt={lead.alt} fill sizes="(max-width: 900px) 100vw, 42vw" quality={85} />
+                <Image src={lead.src} alt={lead.alt} fill sizes="(max-width: 900px) 100vw, 42vw" />
               </div>
               <figcaption>{lead.alt}</figcaption>
             </figure>
@@ -90,7 +89,7 @@ export default function SpecialtyView({ slug }: { slug: SpecialtySlug }) {
                       <li key={item.src}>
                         <figure className="catalog-card">
                           <div className="catalog-card-image">
-                            <Image src={item.src} alt={item.alt} fill sizes="(max-width: 900px) 100vw, 33vw" quality={85} />
+                            <Image src={item.src} alt={item.alt} fill sizes="(max-width: 900px) 100vw, 33vw" />
                           </div>
                           <figcaption>{item.label}</figcaption>
                         </figure>
