@@ -183,7 +183,7 @@ export default function QuoteWorkspace({ initialPaymentComplete = false }: { ini
     <div className="quote-workspace">
       {paymentComplete && (
         <div className="payment-confirmation" role="status">
-          <Check size={16} aria-hidden="true" /> Payment received. A confirmation is on its way to your email.
+          <Check size={16} aria-hidden="true" /> Payment received.
         </div>
       )}
       <div className="workspace-tabs" role="tablist" aria-label="Quote and payment options">
@@ -194,7 +194,7 @@ export default function QuoteWorkspace({ initialPaymentComplete = false }: { ini
           className={tab === "quote" ? "is-active" : ""}
           onClick={() => setTab("quote")}
         >
-          <FileUp size={17} aria-hidden="true" /> Request a quote
+          <FileUp size={17} aria-hidden="true" /> Quote
         </button>
         <button
           type="button"
@@ -203,7 +203,7 @@ export default function QuoteWorkspace({ initialPaymentComplete = false }: { ini
           className={tab === "payment" ? "is-active" : ""}
           onClick={() => setTab("payment")}
         >
-          <CreditCard size={17} aria-hidden="true" /> Pay an invoice
+          <CreditCard size={17} aria-hidden="true" /> Pay
         </button>
       </div>
 
@@ -211,11 +211,9 @@ export default function QuoteWorkspace({ initialPaymentComplete = false }: { ini
         reference ? (
           <div className="form-success" role="status">
             <span className="success-icon"><Check aria-hidden="true" /></span>
-            <p className="form-kicker">Request received</p>
-            <h3>Your curve is in motion.</h3>
+            <h3>Sent.</h3>
             <p>
-              Reference <strong>{reference}</strong>. Our team will review the details and follow up at the
-              email you provided.
+              Reference <strong>{reference}</strong>.
             </p>
             <button
               type="button"
@@ -230,14 +228,14 @@ export default function QuoteWorkspace({ initialPaymentComplete = false }: { ini
                 clearCalculatorQuote();
               }}
             >
-              Start another quote
+              New quote
             </button>
           </div>
         ) : (
           <form className="quote-form" onSubmit={submitQuote}>
             {fromCalculator && (
               <div className="calculator-confirmation" role="status">
-                <Check size={16} aria-hidden="true" /> Calculator dimensions were added to this request.
+                <Check size={16} aria-hidden="true" /> Calculator dimensions added.
               </div>
             )}
             <div className="form-progress" aria-label={`Step ${step} of 3`}>
@@ -254,9 +252,7 @@ export default function QuoteWorkspace({ initialPaymentComplete = false }: { ini
 
             <div className="form-step" hidden={step !== 1}>
               <div className="form-heading">
-                <p className="form-kicker">Step 1 of 3</p>
-                <h3>Tell us what needs to curve.</h3>
-                <p>Rough details are fine. Our team can help resolve the rest.</p>
+                <h3>Project</h3>
               </div>
               <fieldset>
                 <legend>Project type</legend>
@@ -306,22 +302,20 @@ export default function QuoteWorkspace({ initialPaymentComplete = false }: { ini
                 </label>
               </div>
               <label>
-                Anything else we should know?
+                Notes
                 <textarea
                   name="notes"
                   rows={fromCalculator ? 6 : 3}
                   value={notes}
                   onChange={(event) => setNotes(event.target.value)}
-                  placeholder="Tolerances, alloy, tangents, finish requirements, or project context…"
+                  placeholder="Alloy, tolerances, finish…"
                 />
               </label>
             </div>
 
             <div className="form-step" hidden={step !== 2}>
               <div className="form-heading">
-                <p className="form-kicker">Step 2 of 3</p>
-                <h3>Add a drawing or CAD file.</h3>
-                <p>Optional, but the fastest way to an accurate quote.</p>
+                <h3>File</h3>
               </div>
               <div
                 className={`file-drop ${dragging ? "is-dragging" : ""}`}
@@ -354,8 +348,7 @@ export default function QuoteWorkspace({ initialPaymentComplete = false }: { ini
                 ) : (
                   <>
                     <span className="drop-icon"><FileUp aria-hidden="true" /></span>
-                    <strong>Drop your drawing here</strong>
-                    <p>or choose a file from your device</p>
+                    <strong>Drop a file</strong>
                     <button type="button" className="button button-outline" onClick={() => fileInput.current?.click()}>
                       Browse files
                     </button>
@@ -367,9 +360,7 @@ export default function QuoteWorkspace({ initialPaymentComplete = false }: { ini
 
             <div className="form-step" hidden={step !== 3}>
               <div className="form-heading">
-                <p className="form-kicker">Step 3 of 3</p>
-                <h3>Where should we send the quote?</h3>
-                <p>A stretch forming specialist will review your request.</p>
+                <h3>Contact</h3>
               </div>
               <div className="field-grid field-grid-2">
                 <label>
@@ -389,18 +380,17 @@ export default function QuoteWorkspace({ initialPaymentComplete = false }: { ini
                   <input name="phone" type="tel" autoComplete="tel" />
                 </label>
                 <label className="field-span-2">
-                  Desired timeline
+                  Timeline
                   <select name="timeline" defaultValue="Standard">
-                    <option value="Rush">Rush / as soon as possible</option>
-                    <option value="Standard">Standard lead time</option>
-                    <option value="2-4 weeks">Within 2–4 weeks</option>
-                    <option value="Planning">Planning / budgeting</option>
+                    <option value="Rush">Rush</option>
+                    <option value="Standard">Standard</option>
+                    <option value="2-4 weeks">2–4 weeks</option>
+                    <option value="Planning">Planning</option>
                   </select>
                 </label>
               </div>
               <p className="privacy-note">
-                <ShieldCheck size={16} aria-hidden="true" /> Your drawings are used only to review and quote
-                your project.
+                <ShieldCheck size={16} aria-hidden="true" /> Files are used for quoting only.
               </p>
             </div>
 
@@ -426,7 +416,7 @@ export default function QuoteWorkspace({ initialPaymentComplete = false }: { ini
                         : "Sending…"}
                     </>
                   ) : (
-                    <>Send quote request <ArrowRight size={16} aria-hidden="true" /></>
+                    <>Send <ArrowRight size={16} aria-hidden="true" /></>
                   )}
                 </button>
               )}
@@ -437,12 +427,10 @@ export default function QuoteWorkspace({ initialPaymentComplete = false }: { ini
         <form className="payment-form" onSubmit={submitPayment}>
           <span className="payment-lock"><LockKeyhole aria-hidden="true" /></span>
           <div className="form-heading">
-            <p className="form-kicker">Secure online payment</p>
-            <h3>Pay an invoice or order deposit.</h3>
-            <p>Enter the amount shown on your Metal Bending Corporation invoice.</p>
+            <h3>Pay</h3>
           </div>
           <label>
-            Invoice or order number <span aria-hidden="true">*</span>
+            Invoice <span aria-hidden="true">*</span>
             <input name="invoice" required placeholder="e.g. MBC-10482" />
           </label>
           <label>
@@ -458,10 +446,10 @@ export default function QuoteWorkspace({ initialPaymentComplete = false }: { ini
             {paymentLoading ? (
               <><LoaderCircle className="spin" size={17} aria-hidden="true" /> Opening checkout…</>
             ) : (
-              <>Continue to secure checkout <ArrowRight size={16} aria-hidden="true" /></>
+              <>Checkout <ArrowRight size={16} aria-hidden="true" /></>
             )}
           </button>
-          <p className="payment-note"><LockKeyhole size={14} aria-hidden="true" /> Payments are processed securely by Stripe.</p>
+          <p className="payment-note"><LockKeyhole size={14} aria-hidden="true" /> Stripe</p>
         </form>
       )}
     </div>

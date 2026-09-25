@@ -5,7 +5,7 @@ import { useEffect, useMemo, useState } from "react";
 import { specialties, workImages, type SpecialtySlug, type WorkImage } from "@/lib/site-content";
 
 const filters: { id: "all" | SpecialtySlug; label: string }[] = [
-  { id: "all", label: "All work" },
+  { id: "all", label: "All" },
   ...specialties.map((specialty) => ({ id: specialty.slug, label: specialty.navLabel })),
 ];
 

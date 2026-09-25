@@ -50,7 +50,7 @@ export default function SpecialtyView({ slug }: { slug: SpecialtySlug }) {
       <section className="section specialty-body">
         <div className="shell specialty-layout">
           <div className="specialty-copy">
-            {specialty.paragraphs.map((paragraph) => (
+            {specialty.paragraphs?.map((paragraph) => (
               <p key={paragraph}>{paragraph}</p>
             ))}
             <Link className="button button-dark" href="/#quote">

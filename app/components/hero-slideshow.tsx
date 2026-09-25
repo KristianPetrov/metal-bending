@@ -4,8 +4,8 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 
 const slides = [
-  { src: "/work/hero-2.jpg", alt: "Curved metal sections staged for inspection" },
   { src: "/work/hero-1.jpg", alt: "Stretch-formed metal profiles in the shop" },
+  { src: "/work/hero-2.jpg", alt: "Curved metal sections staged for inspection" },
   { src: "/work/hero-4.jpg", alt: "Stacked curved extrusions" },
   { src: "/work/hero-3.jpg", alt: "Precision-formed architectural metal" },
   { src: "/work/hero-5.jpg", alt: "Finished stretch-formed parts" },

@@ -66,16 +66,6 @@ export default function PressFilm() {
         <a href="/mbc-animation.mp4">Watch the Hufford stretch press animation.</a>
       </video>
 
-      <div className="press-film-index" aria-hidden="true">
-        <span>MBC / FORMING STUDY</span>
-        <span>10.05 SEC / LOOP</span>
-      </div>
-
-      <div className="press-film-caption">
-        <span>Hufford stretch press</span>
-        <small>Controlled tension. Smooth radius.</small>
-      </div>
-
       <button
         type="button"
         className="press-film-play"

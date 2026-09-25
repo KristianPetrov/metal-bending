@@ -17,7 +17,7 @@ export default function PageShell({
       <SiteFooter />
       {showMobileQuote && (
         <Link className="mobile-quote-button" href="/#quote">
-          Request a quote <ArrowRight size={16} aria-hidden="true" />
+          Quote <ArrowRight size={16} aria-hidden="true" />
         </Link>
       )}
     </div>

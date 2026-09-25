@@ -7,10 +7,10 @@ import { publishCalculatorQuote } from "@/lib/quote-from-calculator";
 type Tool = "radius" | "arc" | "layout";
 type Unit = "in" | "ft" | "mm" | "cm";
 
-const tools: { id: Tool; number: string; label: string; description: string }[] = [
-  { id: "radius", number: "01", label: "Find radius", description: "From opening width + rise" },
-  { id: "arc", number: "02", label: "Arc dimensions", description: "From radius + angle" },
-  { id: "layout", number: "03", label: "Stud layout", description: "Count + spacing along curve" },
+const tools: { id: Tool; label: string }[] = [
+  { id: "radius", label: "Radius" },
+  { id: "arc", label: "Arc" },
+  { id: "layout", label: "Layout" },
 ];
 
 const unitLabels: Record<Unit, string> = {
@@ -218,9 +218,7 @@ export default function CurveCalculator() {
             className={tool === item.id ? "is-active" : ""}
             onClick={() => setTool(item.id)}
           >
-            <span>{item.number}</span>
             <strong>{item.label}</strong>
-            <small>{item.description}</small>
           </button>
         ))}
       </div>
@@ -229,7 +227,6 @@ export default function CurveCalculator() {
         <div className="curve-controls">
           <div className="curve-control-header">
             <div>
-              <p>Input dimensions</p>
               <h3>{tools.find((item) => item.id === tool)?.label}</h3>
             </div>
             <div className="unit-picker" aria-label="Measurement unit">
@@ -256,13 +253,11 @@ export default function CurveCalculator() {
                   value={rise}
                   onChange={setRise}
                   suffix={unitLabels[unit]}
-                  hint="Measure perpendicular to the chord"
                 />
               </div>
               <div className="curve-presets">
-                <span>Quick set</span>
                 <button type="button" onClick={() => { setSpan("120"); setRise("24"); }}>10 × 2</button>
-                <button type="button" onClick={() => { setSpan("96"); setRise("48"); }}>Half circle</button>
+                <button type="button" onClick={() => { setSpan("96"); setRise("48"); }}>Half</button>
               </div>
             </>
           ) : (
@@ -275,7 +270,6 @@ export default function CurveCalculator() {
                   value={spacing}
                   onChange={setSpacing}
                   suffix={unitLabels[unit]}
-                  hint="Layout rounds down to stay within maximum"
                 />
               )}
             </div>
@@ -290,7 +284,7 @@ export default function CurveCalculator() {
           )}
 
           <button type="button" className="curve-reset" onClick={reset}>
-            <RotateCcw size={14} aria-hidden="true" /> Reset example
+            <RotateCcw size={14} aria-hidden="true" /> Reset
           </button>
         </div>
 
@@ -306,7 +300,6 @@ export default function CurveCalculator() {
               <text x="180" y="181" textAnchor="middle">CHORD / {geometry.valid ? format(geometry.chord, unit) : "—"}</text>
               <text x="189" y={145 - visualRise} textAnchor="start">RISE</text>
             </svg>
-            <span>Centerline geometry · not to scale</span>
           </div>
 
           <div className="curve-results" aria-live="polite">
@@ -329,7 +322,7 @@ export default function CurveCalculator() {
           <div className="curve-output-actions">
             <button type="button" onClick={copySummary} disabled={!geometry.valid}>
               {copied ? <Check size={15} aria-hidden="true" /> : <Clipboard size={15} aria-hidden="true" />}
-              {copied ? "Copied" : "Copy dimensions"}
+              {copied ? "Copied" : "Copy"}
             </button>
             <a
               href="#quote"
@@ -343,15 +336,13 @@ export default function CurveCalculator() {
                 sendToQuote();
               }}
             >
-              Use in a quote <ArrowRight size={15} aria-hidden="true" />
+              Quote <ArrowRight size={15} aria-hidden="true" />
             </a>
           </div>
         </div>
       </div>
 
-      <p className="curve-disclaimer">
-        Planning aid only. Use centerline dimensions and confirm profile, material, tolerances, and bend direction with our forming team.
-      </p>
+      <p className="curve-disclaimer">Planning aid. Confirm with the shop.</p>
     </div>
   );
 }

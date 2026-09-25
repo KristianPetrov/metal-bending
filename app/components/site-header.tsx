@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowUpRight, Menu, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 import { company } from "@/lib/site-content";
@@ -8,20 +8,14 @@ import BrandMark from "./brand-mark";
 
 const links = [
   { href: "/#capabilities", label: "Capabilities" },
-  { href: "/#press", label: "Work" },
-  { href: "/#tools", label: "Curve tools" },
-  { href: "/#process", label: "Process" },
-  { href: "/manufacturing-equipment", label: "Equipment" },
+  { href: "/#tools", label: "Tools" },
+  { href: "/gallery", label: "Gallery" },
 ];
 
 function Brand() {
   return (
     <Link className="brand" href="/" aria-label={`${company.name} home`}>
-      <BrandMark className="brand-mark" />
-      <span className="brand-copy">
-        <strong>Metal Bending</strong>
-        <small>Corporation</small>
-      </span>
+      <BrandMark className="brand-logo" />
     </Link>
   );
 }
@@ -41,7 +35,7 @@ export default function SiteHeader() {
           ))}
         </nav>
         <Link className="header-cta" href="/#quote">
-          Request a quote <ArrowUpRight size={15} aria-hidden="true" />
+          Quote
         </Link>
         <button
           className="menu-toggle"
@@ -61,7 +55,7 @@ export default function SiteHeader() {
           </Link>
         ))}
         <a href={company.phoneHref} onClick={() => setOpen(false)}>
-          Call {company.phone}
+          {company.phone}
         </a>
       </nav>
     </header>

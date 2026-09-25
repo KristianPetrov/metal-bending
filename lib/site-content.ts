@@ -45,17 +45,6 @@ export const designer = {
   url: "https://www.setfreedigitaldisciples.com",
 };
 
-export const story = {
-  intro:
-    "Metal Bending Corporation is a worldwide leader and innovator in the metal curving industry. We use the stretch forming technique to take just about any customer-supplied metal and achieve a precise radius. Complexity is not a problem. By mastering this technique, there are virtually no limits to what can be curved — metal framing, storefront, ceiling systems, and even aircraft components, with great repeatability.",
-  honor:
-    "Since 2006, Metal Bending Corporation has curved parts for projects all over the world. The project that brought the highest honor came in the form of custom curved brake shapes for the new World Trade Center. We take great pride in that work, and in providing aerospace components for the United States Military.",
-  approach:
-    "We take a hands-on approach to each job and stay accessible at every stage. Every project, whether it is one piece or one thousand, is given the same attention and quality assurance.",
-  stretchForming:
-    "Stretch forming is a precise method of forming metal shapes. Material is stretched and bent simultaneously over a die to form simple or complex, smooth, even contoured parts. All forming dies are made in-house, keeping costs down and lead times short. Dies are usually made even before customers have dropped off the material that is getting curved.",
-};
-
 export const specialties: {
   number: string;
   slug: SpecialtySlug;
@@ -65,7 +54,7 @@ export const specialties: {
   summary: string;
   image: string;
   leadImage?: string;
-  paragraphs: string[];
+  paragraphs?: string[];
   catalogHeading?: string;
   catalog?: CatalogGroup[];
 }[] = [
@@ -75,7 +64,7 @@ export const specialties: {
     title: "Curved metal framing",
     navLabel: "Curved Metal Framing",
     detail: "Track, angle, hat channel",
-    summary: "Track, angle, hat channel, expansion joints, and plaster molds for soffits, arches, curved walls, and domes.",
+    summary: "Track, angle, hat channel, expansion joints, plaster molds.",
     image: "/work/framing-3.jpg",
     leadImage: "/work/framing-10.jpg",
     paragraphs: [
@@ -113,13 +102,8 @@ export const specialties: {
     title: "Glass and glazing",
     navLabel: "Glass and Glazing",
     detail: "Storefront, skylights, handrails",
-    summary: "Windows, skylights, sunrooms, storefronts, pressure plates, thermal-break extrusions, and handrails.",
+    summary: "Windows, skylights, storefronts, pressure plates, handrails.",
     image: "/work/glass-2.jpg",
-    paragraphs: [
-      "Since 2006, Metal Bending Corporation has provided curved metal shapes for windows, skylights, sunrooms, and storefronts. With various methods of curving, we can form virtually all metals to an unlimited variety of shapes and sizes.",
-      "We regularly curve aluminum angles, channels, rectangular and round tubes, pressure plates and caps, thermal-break extrusions, and brake metal shapes. These profiles can be formed into semi-circles, segments, and ovals, and can usually have tangents when required.",
-      "In addition to aluminum, we curve brass, steel, bronze, and other metals. We have also done extensive curving of handrails, store fixtures, and shower doors.",
-    ],
   },
   {
     number: "03",
@@ -127,13 +111,8 @@ export const specialties: {
     title: "Curved ceiling components",
     navLabel: "Curved Ceiling Components",
     detail: "Rings, waves, vaults, corbels",
-    summary: "Angles, channels, T-bars, tubes, and custom brake shapes for airports and architectural ceilings worldwide.",
+    summary: "Angles, channels, T-bars, tubes, custom brake shapes.",
     image: "/work/ceiling-1.jpg",
-    paragraphs: [
-      "Ceiling components curved by Metal Bending Corporation have been installed in international airports from LAX to Doha International Airport in Qatar.",
-      "With our newest operating system and the shop’s production team, it is now possible to form ceiling components into rings, waves, cones, arches, vaults, and corbels.",
-      "Standard components such as angles, channels, T-bars, and tubes can all be curved with virtually no limits. Our greatest area of expertise is custom brake shapes and extrusions, including compound radii.",
-    ],
   },
   {
     number: "04",
@@ -141,7 +120,7 @@ export const specialties: {
     title: "Copper gutters",
     navLabel: "Copper Gutters",
     detail: "Half-round, K-style, custom",
-    summary: "Seamless custom-curved copper, aluminum, zinc, and galvanized gutters that follow the fascia.",
+    summary: "Copper, aluminum, zinc, and galvanized gutters.",
     image: "/work/copper-7.jpg",
     leadImage: "/work/copper-16.jpg",
     paragraphs: [
@@ -189,12 +168,8 @@ export const specialties: {
     title: "Aerospace",
     navLabel: "Aerospace",
     detail: "Extrusions, brake shapes, QC",
-    summary: "Specialized stretch forming for aerospace extrusions, brake shapes, and rolled profiles, with tooling made in-house.",
+    summary: "Extrusions, brake shapes, rolled profiles.",
     image: "/work/aerospace-1.jpg",
-    paragraphs: [
-      "Metal Bending Corporation has developed specialized stretch forming methods that improve bend quality in parts for the aerospace industry.",
-      "These methods allow extrusions, brake shapes, and rolled profiles to be curved with greater precision and repeatability. Production of tooling for forming aerospace parts is done in-house to provide more accurate job tracking and quality control.",
-    ],
   },
 ];
 
@@ -286,12 +261,6 @@ export const equipment = {
     "Protractors",
   ],
 };
-
-export const processSteps = [
-  ["01", "Share the geometry", "Send a drawing, CAD file, or rough dimensions. Dies are usually made in-house before material arrives."],
-  ["02", "We form the curve", "Metal is stretched and bent over a die to a smooth, controlled radius — without notching or crimping."],
-  ["03", "Inspect and ship", "Every part is checked, protected, and shipped ready for install, one piece or one thousand."],
-] as const;
 
 export function specialtyBySlug(slug: string) {
   return specialties.find((item) => item.slug === slug);

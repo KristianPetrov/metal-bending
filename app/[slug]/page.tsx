@@ -12,7 +12,6 @@ import {
   featuredWork,
   specialties,
   specialtyBySlug,
-  story,
   type SpecialtySlug,
 } from "@/lib/site-content";
 import {
@@ -148,11 +147,7 @@ export default async function ContentPage({
         <main>
           <section className="page-hero page-hero-plain">
             <div className="shell">
-              <p className="signal-label signal-dark">
-                <span>01</span> Gallery
-              </p>
-              <h1>Work from the shop floor.</h1>
-              <p>Project photographs grouped by specialty.</p>
+              <h1>Gallery</h1>
             </div>
           </section>
           <section className="section work-section">
@@ -172,11 +167,7 @@ export default async function ContentPage({
         <main>
           <section className="page-hero page-hero-plain">
             <div className="shell">
-              <p className="signal-label signal-dark">
-                <span>01</span> Shop
-              </p>
-              <h1>Manufacturing equipment.</h1>
-              <p>Major stretch presses, support equipment, and the quality-assurance bench in Anaheim.</p>
+              <h1>Equipment</h1>
             </div>
           </section>
           <section className="section equipment-page">
@@ -219,15 +210,7 @@ export default async function ContentPage({
         <section id="quote" className="section quote-section">
           <div className="shell quote-grid">
             <div className="quote-intro">
-              <p className="signal-label signal-dark">
-                <span>01</span> Contact
-              </p>
-              <h1>
-                {company.name}
-                <br />
-                <span>Anaheim, California</span>
-              </h1>
-              <p>{story.approach}</p>
+              <h1>Contact</h1>
               <address className="direct-contact">
                 <a href={company.phoneHref}>
                   <Phone size={16} aria-hidden="true" /> {company.phone}
@@ -236,7 +219,7 @@ export default async function ContentPage({
                   <Mail size={16} aria-hidden="true" /> {company.email}
                 </a>
                 <a href={company.orderForm} download>
-                  <FileDown size={16} aria-hidden="true" /> Download order form PDF
+                  <FileDown size={16} aria-hidden="true" /> Order form
                 </a>
               </address>
             </div>
