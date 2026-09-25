@@ -45,6 +45,16 @@ export const designer = {
   url: "https://www.setfreedigitaldisciples.com",
 };
 
+export const about = {
+  paragraphs: [
+    "Metal Bending Corporation stretch-forms customer-supplied metal to a precise radius. Framing, storefront, ceiling systems, and aircraft components can all be curved, and the same profile comes back the same way every time.",
+    "Since 2006, the Anaheim shop has formed parts for projects around the world. That work includes custom brake shapes for the new World Trade Center and aerospace components for the United States military.",
+    "One piece or a thousand, each job gets the same hands-on attention. Someone here stays reachable through the whole project.",
+  ],
+  stretch:
+    "The metal is stretched and bent at the same time over a die, so the curve stays smooth and the shape holds. Dies are made in-house, often before the material arrives, which keeps the lead time short.",
+};
+
 export const specialties: {
   number: string;
   slug: SpecialtySlug;

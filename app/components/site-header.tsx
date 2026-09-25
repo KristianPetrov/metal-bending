@@ -7,6 +7,7 @@ import { company } from "@/lib/site-content";
 import BrandMark from "./brand-mark";
 
 const links = [
+  { href: "/#about", label: "About" },
   { href: "/#capabilities", label: "Capabilities" },
   { href: "/#tools", label: "Tools" },
   { href: "/gallery", label: "Gallery" },

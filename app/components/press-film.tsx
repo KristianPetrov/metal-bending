@@ -52,18 +52,18 @@ export default function PressFilm() {
     <div className="press-film-frame">
       <video
         ref={videoRef}
-        aria-label="Animation of a Hufford stretch press bending a straight metal section into a smooth radius"
+        aria-label="Animation of a stretch press tensioning a metal section, then wrapping it around a die"
         loop
         muted={isMuted}
         playsInline
-        poster="/mbc-animation-poster.jpg"
+        poster="/stretch-press-poster.jpg"
         preload="metadata"
         onPlay={() => setIsPlaying(true)}
         onPause={() => setIsPlaying(false)}
         onVolumeChange={(event) => setIsMuted(event.currentTarget.muted)}
       >
-        <source src="/mbc-animation.mp4" type="video/mp4" />
-        <a href="/mbc-animation.mp4">Watch the Hufford stretch press animation.</a>
+        <source src="/stretch-press-promo.mp4" type="video/mp4" />
+        <a href="/stretch-press-promo.mp4">Watch the stretch press animation.</a>
       </video>
 
       <button

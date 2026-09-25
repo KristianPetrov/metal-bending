@@ -6,7 +6,7 @@ import JsonLd from "./components/json-ld";
 import PageShell from "./components/page-shell";
 import PressFilm from "./components/press-film";
 import QuoteWorkspace from "./components/quote-workspace";
-import { company, specialties } from "@/lib/site-content";
+import { about, company, specialties } from "@/lib/site-content";
 import { DEFAULT_DESCRIPTION, SITE_URL } from "@/lib/seo";
 
 export async function generateMetadata({
@@ -46,12 +46,12 @@ const homeJsonLd = {
     {
       "@type": "VideoObject",
       "@id": `${SITE_URL}/#stretch-forming-video`,
-      name: "How a Hufford stretch press forms a precise metal curve",
+      name: "How a stretch press forms a precise metal curve",
       description:
-        "A short visualization of a Hufford stretch press holding a straight metal section in tension while hydraulic force forms a smooth, repeatable radius.",
-      thumbnailUrl: `${SITE_URL}/mbc-animation-poster.jpg`,
-      contentUrl: `${SITE_URL}/mbc-animation.mp4`,
-      duration: "PT10S",
+        "A short visualization of stretch forming: the press tensions a metal section, then wraps it around a die to a smooth radius.",
+      thumbnailUrl: `${SITE_URL}/stretch-press-poster.jpg`,
+      contentUrl: `${SITE_URL}/stretch-press-promo.mp4`,
+      duration: "PT11S",
       inLanguage: "en-US",
       publisher: { "@id": `${SITE_URL}/#organization` },
     },
@@ -86,6 +86,36 @@ export default async function Home({
           </a>
         </section>
 
+        <section id="about" className="section about-section" aria-labelledby="about-title">
+          <div className="shell about-layout">
+            <div className="about-copy">
+              <h2 id="about-title">About</h2>
+              {about.paragraphs.map((paragraph) => (
+                <p key={paragraph}>{paragraph}</p>
+              ))}
+              <dl className="about-facts">
+                <div>
+                  <dt>Since</dt>
+                  <dd>{company.established}</dd>
+                </div>
+                <div>
+                  <dt>Shop</dt>
+                  <dd>Anaheim</dd>
+                </div>
+                <div>
+                  <dt>Projects</dt>
+                  <dd>Worldwide</dd>
+                </div>
+              </dl>
+            </div>
+            <div className="about-film">
+              <h3>Stretch forming</h3>
+              <p>{about.stretch}</p>
+              <PressFilm />
+            </div>
+          </div>
+        </section>
+
         <section id="capabilities" className="section capabilities-section">
           <div className="shell">
             <header className="section-heading section-heading-simple">
@@ -106,15 +136,6 @@ export default async function Home({
                 </li>
               ))}
             </ul>
-          </div>
-        </section>
-
-        <section id="press" className="section press-film-section" aria-labelledby="press-film-title">
-          <div className="shell">
-            <header className="section-heading section-heading-simple">
-              <h2 id="press-film-title">Press</h2>
-            </header>
-            <PressFilm />
           </div>
         </section>
 
