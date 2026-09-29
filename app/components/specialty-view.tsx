@@ -1,6 +1,7 @@
 import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import ProfileCatalog from "./profile-catalog";
 import WorkGallery from "./work-gallery";
 import {
   imagesForSpecialty,
@@ -15,8 +16,7 @@ export default function SpecialtyView({ slug }: { slug: SpecialtySlug }) {
   const images = imagesForSpecialty(slug);
   const lead = leadImageForSpecialty(slug);
   const heroPhoto = workImages.find((image) => image.src === specialty.image);
-  const catalogSrcs = new Set(specialty.catalog?.flatMap((group) => group.items.map((item) => item.src)) ?? []);
-  const galleryImages = images.filter((image) => !catalogSrcs.has(image.src));
+  const galleryImages = images;
   const leadIsStudio = Boolean(lead?.studio);
 
   return (
@@ -69,7 +69,7 @@ export default function SpecialtyView({ slug }: { slug: SpecialtySlug }) {
       </section>
 
       {specialty.catalog && (
-        <section className="section catalog-section" aria-labelledby={`${slug}-catalog-title`}>
+        <section id="profiles" className="section catalog-section" aria-labelledby={`${slug}-catalog-title`}>
           <div className="shell">
             <header className="section-heading">
               <p className="signal-label signal-dark">
@@ -77,28 +77,10 @@ export default function SpecialtyView({ slug }: { slug: SpecialtySlug }) {
               </p>
               <div>
                 <h2 id={`${slug}-catalog-title`}>{specialty.catalogHeading ?? "Profiles"}</h2>
-                <p>{specialty.detail}.</p>
+                <p>{specialty.summary}</p>
               </div>
             </header>
-            <div className="catalog-groups">
-              {specialty.catalog.map((group) => (
-                <article key={group.heading}>
-                  <h3>{group.heading}</h3>
-                  <ul>
-                    {group.items.map((item) => (
-                      <li key={item.src}>
-                        <figure className="catalog-card">
-                          <div className="catalog-card-image">
-                            <Image src={item.src} alt={item.alt} fill sizes="(max-width: 900px) 100vw, 33vw" />
-                          </div>
-                          <figcaption>{item.label}</figcaption>
-                        </figure>
-                      </li>
-                    ))}
-                  </ul>
-                </article>
-              ))}
-            </div>
+            <ProfileCatalog groups={specialty.catalog} />
           </div>
         </section>
       )}

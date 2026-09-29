@@ -2142,60 +2142,32 @@ legend {
 
 .capability-cards {
   display: grid;
-  gap: 40px 28px;
-  grid-template-columns: repeat(2, 1fr);
+  gap: 28px 18px;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
-.capability-cards li:last-child {
-  grid-column: 1 / -1;
-}
-
 .capability-cards a {
-  display: grid;
-  gap: 18px;
-  grid-template-columns: 1fr;
-  min-height: 0;
-  padding: 0;
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  overflow: hidden;
-  background: var(--paper);
-  transition: box-shadow 200ms ease, border-color 200ms ease;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 0;
 }
 
 .capability-card-image {
-  aspect-ratio: 16 / 10;
-  background: var(--ink);
+  aspect-ratio: 4 / 3;
+  background: #161616;
+  border-radius: 6px;
   display: block;
-  min-height: 0;
   overflow: hidden;
   position: relative;
 }
 
-.capability-cards li:nth-child(odd) .capability-card-image {
-  aspect-ratio: 16 / 10;
-  min-height: 0;
-}
-
-.capability-cards li:last-child a {
-  align-items: center;
-  gap: 0;
-  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
-  min-height: 0;
-}
-
-.capability-cards li:last-child .capability-card-image {
-  aspect-ratio: 16 / 9;
-  min-height: 320px;
-}
-
 .capability-card-copy {
   display: grid;
-  gap: 10px;
-  padding: 8px 28px 28px;
+  gap: 4px;
 }
 
 .capability-card-image img {
@@ -2203,18 +2175,32 @@ legend {
 }
 
 .capability-cards h3 {
-  font-size: clamp(22px, 2vw, 30px);
+  font-size: 18px;
   font-weight: 540;
-  letter-spacing: -0.035em;
-  margin: 8px 0 0;
+  letter-spacing: -0.03em;
+  margin: 0;
 }
 
 .capability-cards p {
   color: var(--muted);
-  font-size: 16px;
-  line-height: 1.65;
+  font-size: 13px;
+  line-height: 1.45;
   margin: 0;
-  max-width: 520px;
+}
+
+.home-profiles {
+  display: grid;
+  gap: 42px;
+  margin-top: 64px;
+}
+
+.home-profiles h3 {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 550;
+  letter-spacing: 0.14em;
+  margin: 0 0 16px;
+  text-transform: uppercase;
 }
 
 .capability-card-link {
@@ -2590,8 +2576,7 @@ legend {
 
 .catalog-groups {
   display: grid;
-  gap: clamp(24px, 4vw, 40px);
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 28px;
 }
 
 .catalog-groups h3 {
@@ -2604,11 +2589,16 @@ legend {
 
 .catalog-groups ul {
   display: grid;
-  gap: 16px;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 18px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   list-style: none;
   margin: 0;
   padding: 0;
+}
+
+.catalog-groups a {
+  color: inherit;
+  display: block;
 }
 
 .catalog-card {
@@ -2618,15 +2608,18 @@ legend {
 }
 
 .catalog-card-image {
-  aspect-ratio: 16 / 10;
-  background: #ffffff;
+  aspect-ratio: 3 / 2;
+  background: #141414;
   overflow: hidden;
   position: relative;
 }
 
 .catalog-card-image img {
+  display: block;
+  height: 100%;
   object-fit: contain;
-  padding: 18px;
+  transition: transform 350ms ease;
+  width: 100%;
 }
 
 .catalog-card figcaption {
@@ -2637,6 +2630,32 @@ legend {
   letter-spacing: 0.12em;
   padding: 12px 14px;
   text-transform: uppercase;
+}
+
+.catalog-card figcaption small {
+  color: var(--muted);
+  display: block;
+  font-family: var(--font-sans);
+  font-size: 12px;
+  letter-spacing: 0;
+  line-height: 1.4;
+  margin-top: 6px;
+  text-transform: none;
+}
+
+.catalog-intro {
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.65;
+  margin: 0 0 22px;
+  max-width: 760px;
+}
+
+.catalog-note {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.5;
+  margin: 16px 0 0;
 }
 
 /* Footer */
@@ -2787,21 +2806,17 @@ legend {
   outline-color: var(--ash);
 }
 
-.capability-cards a:hover {
-  border-color: var(--brand);
-  box-shadow: 0 12px 32px rgba(36, 36, 36, 0.08);
-}
-
 .capability-card-image img {
   transition: transform 350ms ease;
 }
 
-.capability-cards a:hover img {
-  transform: scale(1.025);
+.capability-cards a:hover img,
+.catalog-groups a:hover img {
+  transform: scale(1.03);
 }
 
-.capability-cards li:last-child .capability-card-copy {
-  padding: 32px;
+.catalog-groups a:hover figcaption {
+  color: var(--ash);
 }
 
 @media (max-width: 1120px) and (min-width: 901px) {
@@ -2853,21 +2868,8 @@ legend {
     display: none;
   }
 
-  .capability-cards li:last-child a {
-    gap: 24px;
-    grid-template-columns: minmax(420px, 1.2fr) minmax(0, 1fr);
-  }
-
-  .capability-card-image {
-    min-height: 240px;
-  }
-
-  .capability-cards li:nth-child(odd) .capability-card-image {
-    min-height: 300px;
-  }
-
-  .capability-cards li:last-child .capability-card-image {
-    min-height: 320px;
+  .capability-cards {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
   .work-preview {
@@ -2956,17 +2958,8 @@ legend {
     grid-column: auto;
   }
 
-  .capability-cards a,
-  .capability-cards li:last-child a {
-    grid-template-columns: 1fr;
-    min-height: 0;
-  }
-
-  .capability-card-image,
-  .capability-cards li:nth-child(odd) .capability-card-image,
-  .capability-cards li:last-child .capability-card-image {
-    aspect-ratio: 16 / 10;
-    min-height: 220px;
+  .capability-cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .tools-heading > div:first-child {
@@ -3019,6 +3012,14 @@ legend {
 }
 
 @media (max-width: 700px) {
+  .capability-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .catalog-groups ul {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   html {
     scroll-padding-top: 88px;
   }

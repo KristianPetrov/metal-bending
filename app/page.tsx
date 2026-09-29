@@ -5,6 +5,7 @@ import CurveCalculator from "./components/curve-calculator";
 import JsonLd from "./components/json-ld";
 import PageShell from "./components/page-shell";
 import PressFilm from "./components/press-film";
+import ProfileCatalog from "./components/profile-catalog";
 import QuoteWorkspace from "./components/quote-workspace";
 import { about, company, specialties } from "@/lib/site-content";
 import { DEFAULT_DESCRIPTION, SITE_URL } from "@/lib/seo";
@@ -126,7 +127,7 @@ export default async function Home({
                 <li key={specialty.slug}>
                   <a href={`/${specialty.slug}`}>
                     <span className="capability-card-image">
-                      <Image src={specialty.image} alt={specialty.title} fill sizes="(max-width: 900px) 100vw, (max-width: 1060px) 50vw, 48vw" />
+                      <Image src={specialty.image} alt="" fill sizes="(max-width: 720px) 100vw, (max-width: 1080px) 50vw, 20vw" />
                     </span>
                     <span className="capability-card-copy">
                       <h3>{specialty.title}</h3>
@@ -136,6 +137,22 @@ export default async function Home({
                 </li>
               ))}
             </ul>
+            <div className="home-profiles">
+              <div>
+                <h3>Framing profiles</h3>
+                <ProfileCatalog
+                  groups={specialties.find((item) => item.slug === "curved-metal-framing")!.catalog!}
+                  href="/curved-metal-framing#profiles"
+                />
+              </div>
+              <div>
+                <h3>Radius gutter profiles</h3>
+                <ProfileCatalog
+                  groups={specialties.find((item) => item.slug === "copper-gutters")!.catalog!}
+                  href="/copper-gutters#profiles"
+                />
+              </div>
+            </div>
           </div>
         </section>
 
