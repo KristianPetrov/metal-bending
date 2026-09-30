@@ -27,7 +27,7 @@ export default function SiteHeader() {
     <header className="site-header">
       <div className="shell header-inner">
         <Link className="brand" href="/" aria-label={`${company.name} home`}>
-          <BrandMark className="brand-logo" />
+          <BrandMark className="brand-logo" sizes="200px" preload />
         </Link>
         <nav className="desktop-nav" aria-label="Primary navigation">
           {links.map((link) => (

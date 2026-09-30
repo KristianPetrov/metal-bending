@@ -25,8 +25,8 @@ export default function SiteFooter({ showCta = true }: { showCta?: boolean }) {
       )}
       <div className="shell footer-main">
         <div className="footer-brand">
-          <Link href="/" aria-label={`${company.name} home`}>
-            <BrandMark className="footer-logo" />
+          <Link className="footer-logo-plate steel-surface" href="/" aria-label={`${company.name} home`}>
+            <BrandMark className="footer-logo" sizes="280px" />
           </Link>
           <p>Precision stretch forming for architecture and aerospace. Anaheim, California, since {company.established}.</p>
         </div>

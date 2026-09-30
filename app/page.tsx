@@ -2,6 +2,7 @@ import { ArrowRight, ArrowUpRight, FileDown, Mail, Phone, Printer } from "lucide
 import Image from "next/image";
 import type { Metadata } from "next";
 import Link from "next/link";
+import BrandMark from "./components/brand-mark";
 import CurveCalculator from "./components/curve-calculator";
 import JsonLd from "./components/json-ld";
 import PageShell from "./components/page-shell";
@@ -145,6 +146,13 @@ export default async function Home({
                 </div>
               ))}
             </dl>
+          </div>
+        </section>
+
+        <section className="logo-showcase" aria-label={company.name}>
+          <div className="shell logo-showcase-inner">
+            <BrandMark className="logo-showcase-mark" sizes="(max-width: 700px) 92vw, 960px" />
+            <p>Stretch forming · Anaheim, California · Since {company.established}</p>
           </div>
         </section>
 
