@@ -62,7 +62,7 @@ const homeJsonLd = {
 
 const heroStats = [
   { value: String(company.established), label: "Forming since" },
-  { value: "4", label: "Stretch presses" },
+  { value: "4", label: "Stretch forming machines" },
   { value: "24′", label: "Press arm length" },
   { value: "12″", label: "Max track width" },
 ];
@@ -89,7 +89,7 @@ const processSteps = [
   },
   {
     title: "Checked and shipped",
-    body: "Parts are checked against the radius on granite surface plates with calibrated gages before they leave Anaheim.",
+    body: "Parts are checked against the radius on granite surface plates with precision gages before they leave Anaheim.",
   },
 ];
 
