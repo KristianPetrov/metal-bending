@@ -1,4 +1,5 @@
-import { FileDown, Mail, Phone } from "lucide-react";
+import { ChevronRight, FileDown, Mail, MapPin, Phone, Printer } from "lucide-react";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import JsonLd from "../components/json-ld";
@@ -145,12 +146,13 @@ export default async function ContentPage({
       <PageShell>
         <JsonLd data={pageJsonLd} />
         <main>
-          <section className="page-hero page-hero-plain">
-            <div className="shell">
-              <h1>Gallery</h1>
-            </div>
-          </section>
-          <section className="section work-section">
+          <PlainHero
+            eyebrow="Project gallery"
+            title="Work from the shop"
+            lede="Framing, glazing, ceilings, copper gutters, and aerospace parts, stretch formed in Anaheim and installed on projects around the world."
+            crumb="Gallery"
+          />
+          <section className="section tone-light work-section">
             <div className="shell">
               <WorkGallery initialCategory={cat} />
             </div>
@@ -161,41 +163,39 @@ export default async function ContentPage({
   }
 
   if (slug === "manufacturing-equipment") {
+    const groups = [
+      { title: "Forming", note: "Stretch presses and wrap forming", items: equipment.major },
+      { title: "Support", note: "Cutting, drilling, machining, handling", items: equipment.support },
+      { title: "Quality assurance", note: "Inspection and measurement", items: equipment.quality },
+    ];
     return (
       <PageShell>
         <JsonLd data={pageJsonLd} />
         <main>
-          <section className="page-hero page-hero-plain">
-            <div className="shell">
-              <h1>Equipment</h1>
-            </div>
-          </section>
-          <section className="section equipment-page">
+          <PlainHero
+            eyebrow="Manufacturing equipment"
+            title="The press line and the tools behind it"
+            lede="Hufford and Cyril Bath stretch presses, backed by in-house die making, machining, and granite-plate inspection."
+            crumb="Equipment"
+          />
+          <section className="section tone-light equipment-page">
             <div className="shell equipment-lists">
-              <article>
-                <h2>Major equipment</h2>
-                <ul>
-                  {equipment.major.map((item) => (
-                    <li key={item}>{item}</li>
-                  ))}
-                </ul>
-              </article>
-              <article>
-                <h2>Support equipment</h2>
-                <ul>
-                  {equipment.support.map((item) => (
-                    <li key={item}>{item}</li>
-                  ))}
-                </ul>
-              </article>
-              <article>
-                <h2>Quality assurance</h2>
-                <ul>
-                  {equipment.quality.map((item) => (
-                    <li key={item}>{item}</li>
-                  ))}
-                </ul>
-              </article>
+              {groups.map((group, index) => (
+                <article key={group.title}>
+                  <header>
+                    <span>{String(index + 1).padStart(2, "0")}</span>
+                    <div>
+                      <h2>{group.title}</h2>
+                      <p>{group.note}</p>
+                    </div>
+                  </header>
+                  <ul>
+                    {group.items.map((item) => (
+                      <li key={item}>{item}</li>
+                    ))}
+                  </ul>
+                </article>
+              ))}
             </div>
           </section>
         </main>
@@ -204,22 +204,35 @@ export default async function ContentPage({
   }
 
   return (
-    <PageShell>
+    <PageShell showFooterCta={false}>
       <JsonLd data={pageJsonLd} />
       <main>
-        <section id="quote" className="section quote-section">
+        <PlainHero
+          eyebrow="Contact"
+          title="Talk to the shop"
+          lede="Send a drawing for a quote, pay an invoice, or call to talk through a curve. Someone here stays reachable through the whole project."
+          crumb="Contact"
+        />
+        <section id="quote" className="section tone-mist quote-section">
           <div className="shell quote-grid">
             <div className="quote-intro">
-              <h1>Contact</h1>
+              <h2>Request a quote</h2>
+              <p>Tell us the section, material, quantity, and radius. Drawings help.</p>
               <address className="direct-contact">
                 <a href={company.phoneHref}>
                   <Phone size={16} aria-hidden="true" /> {company.phone}
                 </a>
+                <span>
+                  <Printer size={16} aria-hidden="true" /> Fax {company.fax}
+                </span>
                 <a href={company.emailHref}>
                   <Mail size={16} aria-hidden="true" /> {company.email}
                 </a>
+                <a href={company.mapHref} target="_blank" rel="noreferrer">
+                  <MapPin size={16} aria-hidden="true" /> {company.address}
+                </a>
                 <a href={company.orderForm} download>
-                  <FileDown size={16} aria-hidden="true" /> Order form
+                  <FileDown size={16} aria-hidden="true" /> Download the order form
                 </a>
               </address>
             </div>
@@ -228,5 +241,22 @@ export default async function ContentPage({
         </section>
       </main>
     </PageShell>
+  );
+}
+
+function PlainHero({ eyebrow, title, lede, crumb }: { eyebrow: string; title: string; lede: string; crumb: string }) {
+  return (
+    <section className="page-hero page-hero-plain tone-dark">
+      <div className="shell">
+        <nav className="breadcrumb" aria-label="Breadcrumb">
+          <Link href="/">Home</Link>
+          <ChevronRight size={14} aria-hidden="true" />
+          <span aria-current="page">{crumb}</span>
+        </nav>
+        <p className="eyebrow">{eyebrow}</p>
+        <h1>{title}</h1>
+        <p className="page-hero-lede">{lede}</p>
+      </div>
+    </section>
   );
 }

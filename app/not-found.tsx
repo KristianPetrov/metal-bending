@@ -13,11 +13,12 @@ export default function NotFound() {
   return (
     <PageShell showMobileQuote={false}>
       <main>
-        <section className="page-hero page-hero-plain">
+        <section className="page-hero page-hero-plain tone-dark">
           <div className="shell">
-            <h1>Not found.</h1>
+            <p className="eyebrow">404</p>
+            <h1>This page could not be found.</h1>
             <div className="not-found-actions">
-              <Link className="button button-dark" href="/">
+              <Link className="button button-primary" href="/">
                 <ArrowLeft size={16} aria-hidden="true" /> Home
               </Link>
               <Link className="button button-outline" href="/#quote">

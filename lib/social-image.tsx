@@ -24,8 +24,8 @@ export async function createSocialImage(slug: string) {
       <div
         style={{
           alignItems: "stretch",
-          background: "#0b0d0c",
-          color: "#f7f6f2",
+          background: "#0b0b0b",
+          color: "#f5f5f5",
           display: "flex",
           fontFamily: "Arial, Helvetica, sans-serif",
           height: "100%",
@@ -119,7 +119,7 @@ export async function createSocialImage(slug: string) {
             <div style={{ display: "flex", flexDirection: "column", maxWidth: 820 }}>
               <span
                 style={{
-                  color: "#c5c9c4",
+                  color: "#c4c4c4",
                   fontSize: 15,
                   fontWeight: 700,
                   letterSpacing: "0.2em",
@@ -142,7 +142,7 @@ export async function createSocialImage(slug: string) {
               </span>
               <span
                 style={{
-                  color: "#d5d7d3",
+                  color: "#d4d4d4",
                   fontSize: 20,
                   lineHeight: 1.35,
                   marginTop: 20,
@@ -160,7 +160,7 @@ export async function createSocialImage(slug: string) {
                 marginBottom: 2,
               }}
             >
-              <span style={{ background: "#f7f6f2", display: "flex", height: 2, width: 132 }} />
+              <span style={{ background: "#f5f5f5", display: "flex", height: 2, width: 132 }} />
               <span
                 style={{
                   fontSize: 14,
