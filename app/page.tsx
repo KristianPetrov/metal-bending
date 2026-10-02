@@ -69,6 +69,19 @@ const heroStats = [
   { value: "12″", label: "Max track width" },
 ];
 
+const heroProfileGroups = [
+  {
+    label: "Framing profiles",
+    href: "/curved-metal-framing#profiles",
+    items: specialties.find((item) => item.slug === "curved-metal-framing")!.catalog!.flatMap((group) => group.items),
+  },
+  {
+    label: "Gutter profiles",
+    href: "/copper-gutters#profiles",
+    items: specialties.find((item) => item.slug === "copper-gutters")!.catalog!.flatMap((group) => group.items),
+  },
+];
+
 const projectProof = [
   "World Trade Center",
   "LAX",
@@ -133,6 +146,25 @@ export default async function Home({
                   View our work
                 </Link>
               </div>
+            </div>
+            <div className="hero-profiles" aria-label="Standard profiles">
+              {heroProfileGroups.map((group) => (
+                <div key={group.label} className="hero-profile-group">
+                  <p>{group.label}</p>
+                  <ul>
+                    {group.items.map((item) => (
+                      <li key={item.profile}>
+                        <Link href={group.href} title={`${item.label}: ${item.description}`}>
+                          <span className="hero-profile-image">
+                            <Image src={`/profiles/v2/${item.profile}.webp`} alt={item.alt} fill sizes="120px" />
+                          </span>
+                          <span className="hero-profile-label">{item.label}</span>
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
             </div>
             <dl className="hero-stats">
               {heroStats.map((stat) => (
