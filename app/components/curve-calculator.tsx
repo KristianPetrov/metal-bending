@@ -336,7 +336,7 @@ export default function CurveCalculator() {
                 sendToQuote();
               }}
             >
-              Quote <ArrowRight size={15} aria-hidden="true" />
+              Send to quote <ArrowRight size={15} aria-hidden="true" />
             </a>
           </div>
         </div>

@@ -6,18 +6,20 @@ import SiteHeader from "./site-header";
 export default function PageShell({
   children,
   showMobileQuote = true,
+  showFooterCta = true,
 }: {
   children: React.ReactNode;
   showMobileQuote?: boolean;
+  showFooterCta?: boolean;
 }) {
   return (
     <div className="site-frame">
       <SiteHeader />
       {children}
-      <SiteFooter />
+      <SiteFooter showCta={showFooterCta} />
       {showMobileQuote && (
         <Link className="mobile-quote-button" href="/#quote">
-          Quote <ArrowRight size={16} aria-hidden="true" />
+          Request a quote <ArrowRight size={16} aria-hidden="true" />
         </Link>
       )}
     </div>
