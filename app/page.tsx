@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import BrandMark from "./components/brand-mark";
 import CurveCalculator from "./components/curve-calculator";
+import HeroArcs from "./components/hero-arcs";
 import JsonLd from "./components/json-ld";
 import PageShell from "./components/page-shell";
 import PressFilm from "./components/press-film";
@@ -106,12 +107,19 @@ export default async function Home({
       <JsonLd data={homeJsonLd} />
       <main>
         <section className="hero tone-dark" aria-labelledby="hero-title">
-          <div className="shell hero-grid">
+          <HeroArcs className="hero-arcs" />
+          <div className="shell hero-inner">
+            <div className="hero-plate steel-surface">
+              <span className="hero-screw" aria-hidden="true" />
+              <span className="hero-screw" aria-hidden="true" />
+              <span className="hero-screw" aria-hidden="true" />
+              <span className="hero-screw" aria-hidden="true" />
+              <BrandMark className="hero-logo" sizes="(max-width: 700px) 88vw, 820px" preload />
+            </div>
             <div className="hero-copy">
-              <p className="eyebrow">Stretch forming · Anaheim, California</p>
+              <p className="eyebrow">Stretch forming · Anaheim, California · Since {company.established}</p>
               <h1 id="hero-title">
-                Precision curves.
-                <span>Zero compromise.</span>
+                Precision curves. <span>Zero compromise.</span>
               </h1>
               <p className="hero-lede">
                 Customer-supplied metal, stretch formed to a smooth, repeatable radius for architectural
@@ -126,18 +134,6 @@ export default async function Home({
                 </Link>
               </div>
             </div>
-            <div className="hero-visual">
-              <Image
-                src="/og.png"
-                alt="Stretch-formed aluminum profiles curved to matching radii"
-                fill
-                preload
-                fetchPriority="high"
-                sizes="(max-width: 900px) 100vw, 55vw"
-              />
-            </div>
-          </div>
-          <div className="shell">
             <dl className="hero-stats">
               {heroStats.map((stat) => (
                 <div key={stat.label}>
@@ -146,13 +142,6 @@ export default async function Home({
                 </div>
               ))}
             </dl>
-          </div>
-        </section>
-
-        <section className="logo-showcase" aria-label={company.name}>
-          <div className="shell logo-showcase-inner">
-            <BrandMark className="logo-showcase-mark" sizes="(max-width: 700px) 92vw, 960px" />
-            <p>Stretch forming · Anaheim, California · Since {company.established}</p>
           </div>
         </section>
 
