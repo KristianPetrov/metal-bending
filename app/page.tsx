@@ -72,11 +72,13 @@ const heroStats = [
 const heroProfileGroups = [
   {
     label: "Framing profiles",
+    kind: "Framing",
     href: "/curved-metal-framing#profiles",
     items: specialties.find((item) => item.slug === "curved-metal-framing")!.catalog!.flatMap((group) => group.items),
   },
   {
     label: "Gutter profiles",
+    kind: "Gutter",
     href: "/copper-gutters#profiles",
     items: specialties.find((item) => item.slug === "copper-gutters")!.catalog!.flatMap((group) => group.items),
   },
@@ -147,24 +149,32 @@ export default async function Home({
                 </Link>
               </div>
             </div>
-            <div className="hero-profiles" aria-label="Standard profiles">
-              {heroProfileGroups.map((group) => (
-                <div key={group.label} className="hero-profile-group">
-                  <p>{group.label}</p>
-                  <ul>
-                    {group.items.map((item) => (
-                      <li key={item.profile}>
-                        <Link href={group.href} title={`${item.label}: ${item.description}`}>
-                          <span className="hero-profile-image">
-                            <Image src={`/profiles/v2/${item.profile}.webp`} alt={item.alt} fill sizes="120px" />
-                          </span>
-                          <span className="hero-profile-label">{item.label}</span>
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
+            <div className="hero-profiles" aria-label="Standard framing and gutter profiles">
+              <div className="hero-profiles-head">
+                <p>Standard profiles</p>
+                <span>Framing and gutters, formed to your radius</span>
+              </div>
+              <div className="hero-marquee">
+                <div className="hero-marquee-track">
+                  {[0, 1].map((copy) => (
+                    <ul key={copy} aria-hidden={copy === 1 || undefined}>
+                      {heroProfileGroups.flatMap((group) =>
+                        group.items.map((item) => (
+                          <li key={`${group.label}-${item.profile}`}>
+                            <Link href={group.href} tabIndex={copy === 1 ? -1 : undefined} title={`${item.label}: ${item.description}`}>
+                              <span className="hero-profile-image">
+                                <Image src={`/profiles/v2/${item.profile}.webp`} alt={copy === 1 ? "" : item.alt} fill sizes="180px" />
+                              </span>
+                              <span className="hero-profile-label">{item.label}</span>
+                              <span className="hero-profile-kind">{group.kind}</span>
+                            </Link>
+                          </li>
+                        )),
+                      )}
+                    </ul>
+                  ))}
                 </div>
-              ))}
+              </div>
             </div>
             <dl className="hero-stats">
               {heroStats.map((stat) => (
